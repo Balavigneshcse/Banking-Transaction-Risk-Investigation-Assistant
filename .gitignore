@@ -1,0 +1,11 @@
+__pycache__/
+*.pyc
+.env
+.venv/
+venv/
+node_modules/
+.DS_Store
+deploy.ps1
+seed_users.py
+src/auth.py
+frontend/views/login.html
