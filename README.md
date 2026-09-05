@@ -17,7 +17,7 @@ The application is a Python-based server that serves both the API endpoints and 
 2. Set your Gemini API key and Database Password in your terminal (using PowerShell):
    ```powershell
    $env:GEMINI_API_KEY="YOUR_API_KEY_HERE"
-   $env:DB_PASSWORD="Bala@sql"
+   $env:DB_PASSWORD="[PASSWORD]"
    ```
    *(Note: The system requires your Gemini API key to generate the AI narrative. Replace YOUR_API_KEY_HERE with your actual key.)*
 

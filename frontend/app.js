@@ -23,10 +23,13 @@ async function loadView(viewName) {
     document.getElementById('app-root').innerHTML = html;
     
     document.querySelectorAll('#sidebar-nav .nav-link').forEach(function(link) {
+      const icon = link.querySelector('.material-symbols-rounded');
       if (link.dataset.path === viewName) {
-        link.className = "nav-link flex items-center gap-3 px-3 py-2.5 rounded-lg bg-brand-blue-subtle text-primary font-semibold text-sm transition-colors";
+        link.className = "nav-link group flex items-center gap-3 px-4 py-2.5 rounded-xl font-semibold text-primary bg-primary-subtle shadow-sm transition-all duration-200 ease-out";
+        if (icon) icon.className = "material-symbols-rounded text-[20px] text-primary transition-colors";
       } else {
-        link.className = "nav-link flex items-center gap-3 px-3 py-2.5 rounded-lg font-medium text-sm text-text-secondary hover:bg-surface-subtle hover:text-text-primary transition-colors";
+        link.className = "nav-link group flex items-center gap-3 px-4 py-2.5 rounded-xl font-medium text-sm text-text-secondary hover:bg-surface-subtle hover:text-text-primary transition-all duration-200 ease-out";
+        if (icon) icon.className = "material-symbols-rounded text-[20px] text-text-tertiary group-hover:text-primary transition-colors";
       }
     });
 
@@ -173,6 +176,51 @@ function initInvestigation() {
       btn.disabled = false;
     }
   });
+
+  var searchInput = document.getElementById('search-input');
+  if (searchInput) {
+    searchInput.addEventListener('input', function(e) {
+      var query = e.target.value.toLowerCase();
+      var rows = document.querySelectorAll('#transactions-list-tbody tr');
+      rows.forEach(function(row) {
+        var text = row.textContent.toLowerCase();
+        // Skip hidden by filter
+        if (row.dataset.filtered === 'true') return;
+        row.style.display = text.includes(query) ? '' : 'none';
+      });
+    });
+  }
+
+  var filterBtn = document.getElementById('filter-btn');
+  if (filterBtn) {
+    var filterActive = false;
+    filterBtn.addEventListener('click', function() {
+      filterActive = !filterActive;
+      if (filterActive) {
+        filterBtn.classList.add('bg-primary/10', 'text-primary');
+        filterBtn.classList.remove('text-text-secondary');
+      } else {
+        filterBtn.classList.remove('bg-primary/10', 'text-primary');
+        filterBtn.classList.add('text-text-secondary');
+      }
+      
+      var rows = document.querySelectorAll('#transactions-list-tbody tr');
+      rows.forEach(function(row) {
+        var isFlagged = row.textContent.includes('Flagged');
+        if (filterActive && !isFlagged) {
+          row.style.display = 'none';
+          row.dataset.filtered = 'true';
+        } else {
+          row.dataset.filtered = 'false';
+          row.style.display = '';
+        }
+      });
+      
+      if (searchInput && searchInput.value) {
+          searchInput.dispatchEvent(new Event('input'));
+      }
+    });
+  }
 }
 
 function initBaseline() {
@@ -217,7 +265,8 @@ function initBaseline() {
     };
   });
 
-  window.currentChart = new Chart(chartCanvas, {
+  var canvasEl = document.getElementById('txTimeChart');
+  window.currentChart = new Chart(canvasEl, {
     type: 'scatter',
     data: {
       datasets: [
@@ -261,24 +310,33 @@ function initBaseline() {
       }
     }
   });
+
+  var exportBtn = document.getElementById('export-data-btn');
+  if (exportBtn) {
+    exportBtn.addEventListener('click', function() {
+      if (!globalState.transactions || !globalState.transactions.length) return;
+      var keys = Object.keys(globalState.transactions[0]);
+      var csv = keys.join(',') + '\n';
+      globalState.transactions.forEach(function(t) {
+        csv += keys.map(function(k) { return '"' + (t[k] || '') + '"'; }).join(',') + '\n';
+      });
+      var blob = new Blob([csv], { type: 'text/csv' });
+      var url = window.URL.createObjectURL(blob);
+      var a = document.createElement('a');
+      a.setAttribute('href', url);
+      a.setAttribute('download', 'baseline_transactions.csv');
+      a.click();
+    });
+  }
 }
 
 async function initConfig() {
-  var slider = document.getElementById('slider-large-txn');
-  var label = document.getElementById('label-k-val');
-  var saveBtn = document.getElementById('btn-save');
-  var dryRunBtn = document.getElementById('btn-dry-run');
-  var toast = document.getElementById('save-toast');
-  var toastClose = document.getElementById('toast-close');
-
   var inputs = {
-    'LARGE_TXN_STDDEV_K': slider,
-    'LARGE_TXN_ABS_FLOOR': document.getElementById('input-floor-amount'),
-    'NEW_PAYEE_WINDOW_DAYS': document.getElementById('input-payee-window'),
-    'NEW_PAYEE_BURST_COUNT': document.getElementById('input-burst-count'),
-    'NEW_PAYEE_BURST_WINDOW_HOURS': document.getElementById('input-spend-mult'),
-    'ODD_HOURS_BUFFER': document.getElementById('input-buffer-mins')
+    'LARGE_TXN_STDDEV_K': document.getElementById('input-sigma'),
+    'LARGE_TXN_ABS_FLOOR': document.getElementById('input-floor-amount')
   };
+
+  var saveBtn = document.getElementById('btn-save-config');
 
   // Load current config
   try {
@@ -291,29 +349,15 @@ async function initConfig() {
         inputs[c.config_key].value = c.config_value;
       }
     });
-
-    if (slider && label) {
-      label.textContent = parseFloat(slider.value).toFixed(1) + '\u03C3';
-    }
   } catch (err) {
     console.error("Failed to load config", err);
   }
 
   // Event Listeners
-  if (slider && label) {
-    slider.addEventListener('input', function(e) {
-      label.textContent = parseFloat(e.target.value).toFixed(1) + '\u03C3';
-    });
-  }
-
-  if (toastClose && toast) {
-    toastClose.addEventListener('click', function() { toast.classList.add('hidden'); });
-  }
-
   if (saveBtn) {
     saveBtn.addEventListener('click', async function() {
       var prev = saveBtn.innerHTML;
-      saveBtn.innerHTML = '<span class="material-symbols-outlined text-[16px] animate-spin">refresh</span><span>Saving...</span>';
+      saveBtn.innerHTML = '<span class="material-symbols-rounded text-[18px] animate-spin">refresh</span> Saving...';
       
       var updates = {};
       for (var key in inputs) {
@@ -326,25 +370,11 @@ async function initConfig() {
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify(updates)
         });
-        if (toast) {
-          toast.classList.remove('hidden');
-          setTimeout(function() { toast.classList.add('hidden'); }, 3500);
-        }
       } catch (err) {
-        alert("Failed to save configuration");
+        console.error("Failed to save configuration", err);
       } finally {
-        saveBtn.innerHTML = prev;
+        setTimeout(() => { saveBtn.innerHTML = prev; }, 500);
       }
-    });
-  }
-
-  if (dryRunBtn) {
-    dryRunBtn.addEventListener('click', function() {
-      var prev = dryRunBtn.innerHTML;
-      dryRunBtn.innerHTML = '<span class="material-symbols-outlined text-[16px] animate-spin">refresh</span><span>Simulating...</span>';
-      setTimeout(function() {
-        dryRunBtn.innerHTML = prev;
-      }, 1500);
     });
   }
 }
@@ -353,11 +383,11 @@ function initAudit() {
   var nameEl1 = document.getElementById('audit-customer-name');
   var nameEl2 = document.getElementById('audit-entity-name');
   
-  if (globalState.selectedCustomerId && nameEl1 && nameEl2) {
+  if (globalState.selectedCustomerId) {
     var c = globalState.customers.find(function(c) { return c.customer_id == globalState.selectedCustomerId; });
     if (c) {
-      nameEl1.textContent = c.full_name;
-      nameEl2.textContent = c.full_name;
+      if (nameEl1) nameEl1.textContent = c.full_name;
+      if (nameEl2) nameEl2.textContent = c.full_name;
     }
   }
 
@@ -366,31 +396,21 @@ function initAudit() {
     avgEl.textContent = '\u20B9' + parseFloat(globalState.report.baseline_summary.avg_amount).toLocaleString('en-IN', {minimumFractionDigits:2});
   }
 
-  // PDF Export
-  function showToast(title, message) {
-    var toast = document.getElementById('toastNotification');
-    var toastTitle = document.getElementById('toastTitle');
-    var toastMessage = document.getElementById('toastMessage');
-    if (!toast) return;
-
-    toastTitle.textContent = title;
-    toastMessage.textContent = message;
-
-    toast.classList.remove('hidden');
-    toast.classList.remove('translate-y-2');
-
-    setTimeout(function() {
-      toast.classList.add('translate-y-2');
-      setTimeout(function() { toast.classList.add('hidden'); }, 300);
-    }, 3000);
-  }
-
   var downloadPdfBtn = document.getElementById('downloadPdfBtn');
   if (downloadPdfBtn) {
-    downloadPdfBtn.addEventListener('click', function() {
-      window.print();
-      showToast('SAR PDF Downloaded', 'Filing package successfully exported.');
-    });
+    downloadPdfBtn.addEventListener('click', function() { window.print(); });
+  }
+  
+  var printBtn = document.getElementById('print-btn');
+  if (printBtn) {
+    printBtn.addEventListener('click', function() { window.print(); });
+  }
+
+  var dateEl = document.getElementById('audit-date');
+  if (dateEl) {
+    var today = new Date();
+    var options = { year: 'numeric', month: 'long', day: 'numeric' };
+    dateEl.textContent = today.toLocaleDateString('en-US', options);
   }
 }
 

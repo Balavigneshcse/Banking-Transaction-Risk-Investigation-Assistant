@@ -4,6 +4,10 @@ AI layer for the investigation assistant using Gemini.
 
 import os
 import json
+import warnings
+
+# Suppress the deprecation warning for google.generativeai to keep terminal clean
+warnings.filterwarnings("ignore", category=FutureWarning, module="google.generativeai")
 import google.generativeai as genai
 
 MODEL_NAME = "gemini-1.5-pro"
@@ -39,7 +43,6 @@ Rules you must follow strictly:
 - Keep answers short and direct - a few sentences unless the question needs a list.
 """
 
-
 def _get_model(system_instruction):
     api_key = os.environ.get("GEMINI_API_KEY")
     if not api_key:
@@ -52,7 +55,6 @@ def _get_model(system_instruction):
         )
     except Exception as e:
         return None
-
 
 def _fallback_narrative(report):
     if report["overall_verdict"] == "no_concerns":
@@ -73,7 +75,6 @@ def _fallback_narrative(report):
         lines.append(f"{f['summary']} (transactions {txn_ids}). {f['first_step']}")
     return " ".join(lines)
 
-
 def generate_narrative(report):
     model = _get_model(SYSTEM_PROMPT)
     if model is None:
@@ -86,7 +87,6 @@ def generate_narrative(report):
         return (text or _fallback_narrative(report)), ("ai" if text else "fallback")
     except Exception:
         return _fallback_narrative(report), "fallback"
-
 
 def answer_question(report, question, history=None):
     model = _get_model(ASK_SYSTEM_PROMPT)

@@ -1,126 +1,188 @@
-<!-- Main Content Wrapper -->
-<div class="pl-64 flex-1 flex flex-col min-w-0">
-<!-- Main Container -->
-<main class="p-8 max-w-6xl w-full mx-auto space-y-6">
-<!-- 1. Clear Prominent Case Header -->
-<section class="bg-surface-default rounded-xl border border-border-subtle p-6 flex flex-col sm:flex-row sm:items-center justify-between gap-5">
-<div class="flex items-center gap-4">
-<div class="w-12 h-12 rounded-xl bg-blue-50 text-primary flex items-center justify-center font-display font-bold text-lg border border-blue-100">
-            EV
+<div class="flex-1 flex flex-col min-w-0 h-full animate-fade-in">
+  
+  <!-- Premium Header -->
+  <header class="h-[80px] bg-surface-default/80 backdrop-blur-md border-b border-border-subtle sticky top-0 z-30 px-8 flex items-center justify-between">
+    <div class="flex items-center gap-4">
+      <div class="flex items-center gap-2 px-3 py-1.5 rounded-lg bg-surface-subtle border border-border-subtle">
+        <span class="material-symbols-rounded text-[18px] text-text-tertiary">folder_open</span>
+        <span class="font-sans text-xs font-semibold text-text-secondary tracking-widest uppercase">Investigation Queue</span>
+      </div>
+    </div>
+    
+    <div class="flex items-center gap-6">
+      <div class="relative w-72">
+        <span class="material-symbols-rounded absolute left-3 top-2 text-text-tertiary text-[18px]">search</span>
+        <input id="search-input" class="w-full h-9 pl-10 pr-3 text-sm bg-surface-subtle rounded-lg border-transparent focus:bg-surface-default focus:border-primary/30 focus:ring-2 focus:ring-primary/20 transition-all placeholder:text-text-tertiary shadow-sm" placeholder="Search case or transaction ID..." type="text"/>
+      </div>
+      
+      <div class="h-6 w-px bg-border-subtle"></div>
+      
+      <div class="flex items-center gap-3">
+        
+      </div>
+    </div>
+  </header>
+
+  <main class="p-8 max-w-[1400px] w-full mx-auto space-y-6 pb-24">
+    
+    <!-- Hero / Control Section -->
+    <div class="flex flex-col md:flex-row md:items-end justify-between gap-6 bg-surface-default p-8 rounded-2xl shadow-card border border-border-subtle relative overflow-hidden">
+      <!-- Decorative background accent -->
+      <div class="absolute top-0 right-0 w-64 h-64 bg-primary-subtle rounded-full blur-[80px] -mr-20 -mt-20 opacity-50 pointer-events-none"></div>
+
+      <div class="relative z-10 space-y-4 flex-1">
+        <div>
+          <h1 class="font-display text-4xl font-bold text-text-primary tracking-tight">Case <span class="text-primary font-mono ml-2">INC-882914-TX</span></h1>
+        </div>
+        
+        <div class="flex flex-col w-full max-w-md gap-2 mt-4">
+          <label class="text-xs font-semibold text-text-tertiary uppercase tracking-widest">Select Subject Account</label>
+          <select class="h-11 rounded-xl bg-surface-subtle border-transparent focus:border-primary focus:ring-primary shadow-sm text-sm font-medium w-full" id="customer-select">
+            <!-- Populated via JS -->
+          </select>
+          <div class="font-mono text-[11px] text-text-tertiary mt-1 flex items-center gap-1.5" id="customer-meta">
+            <span class="material-symbols-rounded text-[14px]">info</span> Select an account to view baseline history
           </div>
-<div>
-<div class="flex items-center gap-3 flex-wrap">
-<select id="customer-select" class="text-2xl font-display font-bold text-brand-navy tracking-tight bg-transparent border-0 border-b-2 border-primary focus:ring-0 cursor-pointer pb-1 pr-8">
-  <option>Loading...</option>
-</select>
-<span id="investigation-status-badge" class="hidden inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full text-xs font-semibold bg-risk-warning-bg text-risk-warning border border-amber-200">
-<span class="w-1.5 h-1.5 rounded-full bg-risk-warning"></span>
-                Review Recommended
-              </span>
-</div>
-<p id="customer-meta" class="text-xs text-text-tertiary mt-1">Select a customer to view details</p>
-</div>
-</div>
-<div class="flex items-center gap-3 shrink-0">
-<button id="investigate-btn" class="h-9 px-4 rounded-lg bg-surface-default border border-border-strong text-text-secondary text-xs font-semibold hover:bg-surface-subtle transition-colors flex items-center gap-1.5" type="button">
-<span class="material-symbols-outlined text-[16px]">sync</span>
-<span>Run Investigation</span>
-</button>
-<button class="h-9 px-4 rounded-lg bg-primary text-white text-xs font-semibold hover:bg-primary-hover shadow-sm transition-colors flex items-center gap-1.5" type="button">
-<span class="material-symbols-outlined text-[16px]">ios_share</span>
-<span>Export SAR</span>
-</button>
-</div>
-</section>
-<!-- 2. Concise 3-Metric KPI Row -->
-<section class="grid grid-cols-1 md:grid-cols-3 gap-5">
-<!-- Metric 1 -->
-<div class="bg-surface-default p-5 rounded-xl border border-border-subtle shadow-sm">
-<span class="text-xs font-medium text-text-tertiary">Outlier Transaction</span>
-<div class="mt-2 flex items-baseline gap-2">
-<span class="font-mono text-2xl font-bold text-brand-navy tracking-tight">₹14,250.00</span>
-</div>
-<span class="text-xs text-text-secondary mt-1 block">vs. ₹820.00 60-day baseline avg</span>
-</div>
-<!-- Metric 2 -->
-<div class="bg-surface-default p-5 rounded-xl border border-border-subtle shadow-sm">
-<span class="text-xs font-medium text-text-tertiary">Statistical Deviation</span>
-<div class="mt-2 flex items-baseline gap-2">
-<span class="font-mono text-2xl font-bold text-risk-critical tracking-tight">+3.40 σ</span>
-</div>
-<span class="text-xs text-text-secondary mt-1 block">Breaches 3.0σ standard threshold</span>
-</div>
-<!-- Metric 3 -->
-<div class="bg-surface-default p-5 rounded-xl border border-border-subtle shadow-sm">
-<span class="text-xs font-medium text-text-tertiary">Triggered Rules</span>
-<div class="mt-2 flex items-baseline gap-2">
-<span class="font-mono text-2xl font-bold text-brand-navy tracking-tight">3 Rules</span>
-</div>
-<span class="text-xs text-text-secondary mt-1 block">Mathematical outlier violations</span>
-</div>
-</section>
-<div id="investigation-results-container" class="hidden space-y-6">
-<!-- 3. Clean AI Investigation Narrative Card -->
-<section class="bg-surface-default rounded-xl border border-border-subtle p-6 space-y-4">
-<div class="flex items-center justify-between border-b border-border-subtle pb-3">
-<div class="flex items-center gap-2">
-<span class="material-symbols-outlined text-primary text-[20px]">psychology</span>
-<h2 class="text-sm font-display font-semibold text-brand-navy">AI Investigation Narrative</h2>
-</div>
-<span class="text-[11px] font-medium text-text-tertiary bg-surface-subtle px-2.5 py-1 rounded-md">
-            Deterministic Synthesis
+        </div>
+      </div>
+
+      <div class="relative z-10 flex flex-col items-end shrink-0 gap-3">
+        <div class="hidden" id="investigation-status-badge">
+          <!-- Injected via JS -->
+        </div>
+        <button class="h-12 px-8 rounded-xl bg-primary text-white font-semibold text-sm flex items-center gap-2 hover:bg-primary-hover hover:-translate-y-0.5 transition-all duration-200 shadow-md hover:shadow-lg disabled:opacity-70 disabled:hover:translate-y-0" id="investigate-btn">
+          <span class="material-symbols-rounded text-[20px]">psychology</span>
+          <span>Generate AI Risk Narrative</span>
+        </button>
+      </div>
+    </div>
+
+    <!-- Dynamic Investigation Results -->
+    <div class="hidden space-y-6 animate-slide-up" id="investigation-results-container">
+      
+      <!-- KPI Row -->
+      <section class="grid grid-cols-1 md:grid-cols-3 gap-6">
+        <div class="bg-surface-default p-6 rounded-2xl shadow-card border border-border-subtle group hover:shadow-card-hover transition-all">
+          <div class="flex items-center justify-between mb-4">
+            <span class="text-xs font-bold text-text-tertiary uppercase tracking-widest">Outlier Amount</span>
+            <div class="w-8 h-8 rounded-lg bg-surface-subtle flex items-center justify-center group-hover:bg-primary-subtle transition-colors">
+              <span class="material-symbols-rounded text-[18px] text-text-secondary group-hover:text-primary transition-colors">payments</span>
+            </div>
+          </div>
+          <div class="font-mono text-3xl font-bold text-text-primary tracking-tight">₹14,250.00</div>
+          <span class="text-xs text-text-secondary mt-2 flex items-center gap-1.5 font-medium">
+            <span class="material-symbols-rounded text-[14px] text-risk-warning">trending_up</span> vs. ₹820.00 baseline
           </span>
-</div>
-</div>
-</section>
-<!-- 4. Core Rule Violations List -->
-<div class="pt-2">
-<div class="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-surface-subtle text-[11px] text-text-secondary font-medium">
-<span class="material-symbols-outlined text-text-tertiary text-[14px]">verified_user</span>
-<span>Compliance Note: Narrative operates as an explanatory summary. All legal thresholds and actions are deterministic.</span>
-</div>
-</div>
-</section>
-<!-- 4. Core Rule Violations List -->
-<section class="bg-surface-default rounded-xl border border-border-subtle p-6 space-y-4">
-<div class="flex items-center justify-between border-b border-border-subtle pb-3">
-<div class="flex items-center gap-2">
-<span class="material-symbols-outlined text-primary text-[20px]">rule_folder</span>
-<h2 class="text-sm font-display font-semibold text-brand-navy">Core Rule Violations</h2>
-</div>
-<span class="text-xs text-text-tertiary font-mono">3 rules fired</span>
-</div>
-</div>
-<div id="rule-violations-list" class="space-y-3">
-  <!-- Dynamic violations inserted here -->
-</div>
-</section>
-<!-- 5. Minimalist Recent Transactions Table -->
-<section class="bg-surface-default rounded-xl border border-border-subtle p-6 space-y-4">
-<div class="flex items-center justify-between border-b border-border-subtle pb-3">
-<div class="flex items-center gap-2">
-<span class="material-symbols-outlined text-primary text-[20px]">receipt_long</span>
-<h2 class="text-sm font-display font-semibold text-brand-navy">Recent Transactions</h2>
-</div>
-<span class="text-xs text-text-tertiary font-mono">Window: Past 24h</span>
-</div>
-<div class="overflow-x-auto">
-<table class="w-full text-left text-xs">
-<thead>
-<tr class="text-text-tertiary uppercase tracking-wider font-semibold border-b border-border-subtle">
-<th class="pb-3 font-medium">Status</th>
-<th class="pb-3 font-medium">Reference</th>
-<th class="pb-3 font-medium">Timestamp</th>
-<th class="pb-3 font-medium">Payee / Description</th>
-<th class="pb-3 font-medium text-right">Amount</th>
-<th class="pb-3 font-medium text-right">Deviation</th>
-</tr>
-</thead>
-<tbody id="transactions-list-tbody" class="divide-y divide-border-subtle font-normal text-text-secondary">
-  <!-- Dynamic rows -->
-</tbody>
-</table>
-</div>
-</section>
-</main>
+        </div>
+        
+        <div class="bg-surface-default p-6 rounded-2xl shadow-card border border-border-subtle group hover:shadow-card-hover transition-all">
+          <div class="flex items-center justify-between mb-4">
+            <span class="text-xs font-bold text-text-tertiary uppercase tracking-widest">Stat Deviation</span>
+            <div class="w-8 h-8 rounded-lg bg-surface-subtle flex items-center justify-center group-hover:bg-risk-critical-bg transition-colors">
+              <span class="material-symbols-rounded text-[18px] text-text-secondary group-hover:text-risk-critical transition-colors">show_chart</span>
+            </div>
+          </div>
+          <div class="font-mono text-3xl font-bold text-risk-critical tracking-tight">+54.80 σ</div>
+          <span class="text-xs text-text-secondary mt-2 flex items-center gap-1.5 font-medium">
+            <span class="material-symbols-rounded text-[14px] text-risk-critical">warning</span> Breaches 3.0σ limit
+          </span>
+        </div>
+        
+        <div class="bg-surface-default p-6 rounded-2xl shadow-card border border-border-subtle group hover:shadow-card-hover transition-all">
+          <div class="flex items-center justify-between mb-4">
+            <span class="text-xs font-bold text-text-tertiary uppercase tracking-widest">Triggered Rules</span>
+            <div class="w-8 h-8 rounded-lg bg-surface-subtle flex items-center justify-center group-hover:bg-risk-warning-bg transition-colors">
+              <span class="material-symbols-rounded text-[18px] text-text-secondary group-hover:text-risk-warning transition-colors">rule</span>
+            </div>
+          </div>
+          <div class="font-display text-3xl font-bold text-text-primary tracking-tight">3 Flags</div>
+          <span class="text-xs text-text-secondary mt-2 flex items-center gap-1.5 font-medium">
+            High confidence anomalous event
+          </span>
+        </div>
+      </section>
+
+      <!-- AI Narrative & Rules Split -->
+      <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
+        
+        <!-- Rules Hit -->
+        <div class="lg:col-span-1 flex flex-col gap-4">
+          <h3 class="font-sans text-sm font-bold text-text-primary flex items-center gap-2">
+            <span class="material-symbols-rounded text-risk-critical text-[18px]">gavel</span> Deterministic Triggers
+          </h3>
+          <div class="flex-1 space-y-3" id="rule-violations-list">
+            <!-- Injected via JS -->
+          </div>
+        </div>
+
+        <!-- AI Narrative -->
+        <div class="lg:col-span-2 flex flex-col gap-4">
+          <h3 class="font-sans text-sm font-bold text-primary flex items-center gap-2">
+            <span class="material-symbols-rounded text-primary text-[18px]">auto_awesome</span> Gemini AI Narrative Synthesis
+          </h3>
+          <div class="flex-1 bg-surface-default p-6 rounded-2xl shadow-card border border-primary/20 relative overflow-hidden">
+            <div class="absolute top-0 left-0 w-1 h-full bg-gradient-to-b from-primary to-indigo-400"></div>
+            <div class="prose prose-sm prose-slate max-w-none prose-headings:font-display prose-headings:text-primary prose-a:text-primary prose-strong:text-text-primary">
+              <p class="text-text-secondary leading-relaxed">
+                <span class="font-semibold text-text-primary">Summary:</span> The transaction behavior is highly anomalous. The account initiated an outbound transfer of <span class="font-mono font-bold text-risk-critical">₹14,250.00</span> to an unrecognized overseas entity.
+              </p>
+              <p class="text-text-secondary leading-relaxed mt-4">
+                This single transaction volume exceeds the established behavioral mean (₹820.00) by a massive <strong class="text-risk-critical">+54.80 standard deviations</strong>, bypassing historical liquidity constraints. The transfer occurred at 02:44 AM (local tz), entirely outside the historical operational window (09:00 - 18:00).
+              </p>
+            </div>
+            <div class="mt-6 pt-4 border-t border-border-subtle flex items-center justify-between">
+              <span class="font-mono text-[10px] font-semibold text-text-tertiary uppercase tracking-widest flex items-center gap-1.5">
+                <span class="material-symbols-rounded text-[14px]">verified</span> Grounded via Deterministic Rules Engine
+              </span>
+              <button class="text-xs font-semibold text-primary hover:text-primary-hover flex items-center gap-1">
+                View Full SAR Audit <span class="material-symbols-rounded text-[16px]">arrow_right_alt</span>
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- Data Ledger -->
+    <section class="mt-8">
+      <div class="flex items-center justify-between mb-4">
+        <h3 class="font-sans text-sm font-bold text-text-primary flex items-center gap-2">
+          <span class="material-symbols-rounded text-text-secondary text-[18px]">list_alt</span> Full Transaction Ledger
+        </h3>
+        <button id="filter-btn" class="text-xs font-semibold text-text-secondary hover:text-text-primary flex items-center gap-1 px-3 py-1.5 rounded-md hover:bg-surface-hover transition-colors">
+          <span class="material-symbols-rounded text-[16px]">filter_list</span> Filter
+        </button>
+      </div>
+      
+      <div class="bg-surface-default rounded-2xl shadow-card border border-border-subtle overflow-hidden">
+        <div class="overflow-x-scroll overflow-y-scroll max-h-[500px]">
+          <table class="w-full text-left text-sm whitespace-nowrap min-w-[800px]">
+            <thead class="bg-surface-subtle/50 border-b border-border-subtle">
+              <tr>
+                <th class="px-6 py-4 font-bold text-xs text-text-tertiary uppercase tracking-widest w-24">Risk Status</th>
+                <th class="px-6 py-4 font-bold text-xs text-text-tertiary uppercase tracking-widest">Transaction ID</th>
+                <th class="px-6 py-4 font-bold text-xs text-text-tertiary uppercase tracking-widest">Date & Time</th>
+                <th class="px-6 py-4 font-bold text-xs text-text-tertiary uppercase tracking-widest">Counterparty / Description</th>
+                <th class="px-6 py-4 font-bold text-xs text-text-tertiary uppercase tracking-widest text-right">Amount</th>
+                <th class="px-6 py-4 font-bold text-xs text-text-tertiary uppercase tracking-widest text-right">Channel</th>
+              </tr>
+            </thead>
+            <tbody class="divide-y divide-border-subtle" id="transactions-list-tbody">
+              <!-- Injected via JS -->
+              <tr>
+                <td colspan="6" class="px-6 py-12 text-center">
+                  <div class="flex flex-col items-center justify-center gap-2">
+                    <span class="material-symbols-rounded text-3xl text-text-tertiary animate-pulse">pending</span>
+                    <span class="font-medium text-text-secondary text-sm">Select an account to load ledger</span>
+                  </div>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </section>
+
+  </main>
 </div>

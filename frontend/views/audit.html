@@ -1,237 +1,132 @@
-<!-- Main Content Wrapper -->
-<div class="pl-64">
-<!-- Top Header Bar -->
-<header class="fixed top-0 left-64 right-0 h-16 bg-surface-default border-b border-border-subtle z-40 px-8 flex items-center justify-between shadow-sm">
-<div class="flex items-center gap-4">
-<div class="flex items-center gap-2 text-text-tertiary text-xs">
-<span class="material-symbols-outlined text-[16px]">corporate_fare</span>
-<span>FedLine Wire</span>
-<span class="text-border-strong">/</span>
-<span class="text-brand-navy font-mono-data font-semibold text-xs">INC-882914-TX</span>
-</div>
-<div class="h-4 w-px bg-border-strong"></div>
-<div class="flex items-center gap-2 bg-risk-critical-bg border border-risk-critical-border px-2.5 py-1 rounded-full">
-<span class="w-1.5 h-1.5 rounded-full bg-risk-critical"></span>
-<span class="font-mono-id text-xs text-risk-critical font-bold uppercase tracking-wide">Status: Under Review (4.2σ Hit)</span>
-</div>
-</div>
-</header>
-<!-- Page Body -->
-<main class="w-full pt-16 bg-surface min-h-screen">
-<!-- Simplified Header Banner -->
-<div class="px-10 py-6 bg-surface-default border-b border-border-subtle">
-<div class="max-w-6xl mx-auto flex flex-col md:flex-row md:items-center justify-between gap-4">
-<div class="flex flex-col gap-1">
-<div class="flex items-center gap-2 text-text-tertiary text-xs font-mono-id font-medium tracking-wide uppercase">
-<span>Case #INV-2025-0841</span>
-<span>•</span>
-<span id="audit-customer-name" class="text-brand-navy font-semibold">Eleanor Vance</span>
-<span>•</span>
-<span>BSA / AML Compliant</span>
-</div>
-<h1 class="font-headline-lg text-2xl text-brand-navy font-bold tracking-tight">Suspicious Activity Report (SAR) Package</h1>
-</div>
-<div class="flex items-center gap-3">
-<button class="h-10 px-5 rounded-lg bg-primary text-on-primary font-medium text-sm flex items-center gap-2 hover:bg-brand-blue-hover shadow-sm transition-colors" id="downloadPdfBtn" type="button">
-<span class="material-symbols-outlined text-[18px]">file_download</span>
-<span>Download SAR PDF</span>
-</button>
-</div>
-</div>
-</div>
-<!-- Main Layout: Clean Asymmetric Columns -->
-<div class="max-w-6xl mx-auto px-10 py-8">
-<div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
-<!-- LEFT COLUMN: Clean SAR Summary Document Sheet (8 cols) -->
-<div class="lg:col-span-8 flex flex-col space-y-6">
-<div class="bg-surface-default border border-border-subtle rounded-xl p-8 shadow-sm flex flex-col space-y-7">
-<!-- Document Sheet Header -->
-<div class="border-b border-border-subtle pb-5 flex items-start justify-between">
-<div>
-<div class="font-mono-id text-xs text-text-tertiary uppercase font-semibold tracking-wider">Filing Reference • SAR-2025-992014</div>
-<h2 class="font-headline-sm text-xl font-bold text-brand-navy mt-1">Suspicious Activity Report Annex</h2>
-</div>
-<div class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-risk-critical-bg border border-risk-critical-border text-risk-critical font-mono-id text-xs font-semibold">
-<span class="w-2 h-2 rounded-full bg-risk-critical"></span>
-                  Filing Recommended
-                </div>
-</div>
-<!-- Subject & Filing Institution Summary -->
-<div class="grid grid-cols-1 md:grid-cols-2 gap-4 p-4 rounded-lg bg-surface-subtle border border-border-subtle">
-<div class="space-y-1">
-<div class="font-label-md text-xs text-text-tertiary uppercase font-medium">Subject Legal Entity</div>
-<div id="audit-entity-name" class="font-title-md text-sm font-semibold text-brand-navy">Eleanor M. Vance</div>
-<div class="font-mono-id text-xs text-text-secondary">ACC #ACC-99214-US • SSN XXX-XX-4902</div>
-</div>
-<div class="space-y-1">
-<div class="font-label-md text-xs text-text-tertiary uppercase font-medium">Filing Institution</div>
-<div class="font-title-md text-sm font-semibold text-brand-navy">Apex Settlement Bank NA</div>
-<div class="font-mono-id text-xs text-text-secondary">FDIC #09412 • Examiner: S. Jenkins (SA-410)</div>
-</div>
-</div>
-<!-- Core Statistical Proof: 3 Key Numbers -->
-<div class="space-y-2.5">
-<div class="font-label-md text-xs text-text-tertiary uppercase font-semibold tracking-wider">Statistical Anomaly Proof</div>
-<div class="grid grid-cols-3 gap-4">
-<div class="p-4 rounded-lg bg-surface-subtle border border-border-subtle flex flex-col">
-<span class="text-xs text-text-secondary font-medium">Baseline Mean (μ)</span>
-<span id="audit-stat-avg" class="font-mono-metric text-2xl font-bold text-brand-navy mt-1">₹820.50</span>
-<span class="text-[11px] text-text-tertiary mt-1">180-day window (n=428)</span>
-</div>
-<div class="p-4 rounded-lg bg-surface-subtle border border-border-subtle flex flex-col">
-<span class="text-xs text-text-secondary font-medium">Triggered Txn</span>
-<span class="font-mono-metric text-2xl font-bold text-risk-critical mt-1">₹14,250.00</span>
-<span class="text-[11px] text-text-tertiary mt-1">FedLine Outbound Wire</span>
-</div>
-<div class="p-4 rounded-lg bg-risk-critical-bg border border-risk-critical-border flex flex-col">
-<span class="text-xs text-risk-critical font-semibold uppercase">Z-Score Deviation</span>
-<span class="font-mono-metric text-2xl font-bold text-risk-critical mt-1">+54.8 σ</span>
-<span class="text-[11px] text-risk-critical font-medium mt-1">Threshold: &gt; 3.0 σ</span>
-</div>
-</div>
-</div>
-<!-- Narrative Synthesis: Clean 2-paragraph auditable explanation -->
-<div class="space-y-3">
-<div class="font-label-md text-xs text-text-tertiary uppercase font-semibold tracking-wider">Part V: Narrative Synthesis</div>
-<div class="space-y-3.5 text-sm text-text-secondary leading-relaxed bg-brand-blue-subtle/30 border-l-2 border-primary p-4 rounded-r-lg border border-border-subtle">
-<p>
-                    On October 24, 2025 at 14:22:04 UTC, account <span class="font-semibold text-brand-navy font-mono-id">#ACC-99214-US</span> initiated an atypical external outbound wire transfer totaling <strong class="text-brand-navy">₹14,250.00</strong> payable to <strong class="text-brand-navy">Oasis Trading LLC (Seychelles)</strong>. Over the preceding 180-day baseline period, customer transactions averaged ₹820.50 with an expected standard deviation of ₹245.10.
-                  </p>
-<p>
-                    The anomalous transaction represents an unprecedented <strong class="text-risk-critical font-mono-data">+54.8σ deviation</strong> from established behavioral parameters. Cross-referencing against customer historical filings and merchant identifiers indicated no prior commercial relationship or verifiable trade invoices supporting this sudden liquidity transfer.
-                  </p>
-</div>
-</div>
-<!-- Triggered Transaction Detail Card -->
-<div class="space-y-2.5">
-<div class="font-label-md text-xs text-text-tertiary uppercase font-semibold tracking-wider">Triggered Transaction</div>
-<div class="p-4 rounded-lg border border-border-subtle bg-surface-default flex flex-col sm:flex-row sm:items-center justify-between gap-4">
-<div class="flex items-start gap-3">
-<div class="w-10 h-10 rounded-lg bg-risk-critical-bg text-risk-critical border border-risk-critical-border flex items-center justify-center shrink-0">
-<span class="material-symbols-outlined text-[20px]">arrow_outward</span>
-</div>
-<div>
-<div class="font-title-md text-sm font-semibold text-brand-navy">Wire Out • Oasis Trading LLC</div>
-<div class="font-mono-id text-xs text-text-tertiary mt-0.5">Ref: TXN-90412-WIRE • Oct 24, 2025 14:22:04 UTC</div>
-</div>
-</div>
-<div class="text-right sm:border-l sm:border-border-subtle sm:pl-6">
-<div class="font-mono-metric text-lg font-bold text-risk-critical">₹14,250.00</div>
-<div class="font-mono-id text-[11px] text-text-tertiary mt-0.5">Port Victoria, Seychelles</div>
-</div>
-</div>
-</div>
-<!-- Cryptographic Sign-Off Stamp -->
-<div class="pt-5 border-t border-border-subtle flex flex-col sm:flex-row items-center justify-between gap-4">
-<div class="flex items-center gap-3">
-<div class="w-8 h-8 rounded-full bg-status-safe-bg text-status-safe border border-status-safe-border flex items-center justify-center">
-<span class="material-symbols-outlined text-[18px]">verified</span>
-</div>
-<div>
-<div class="text-xs font-semibold text-brand-navy">Cryptographically Verified SAR Record</div>
-<div class="font-mono-id text-[11px] text-text-tertiary">Signer: Sarah Jenkins, SA-410 • Timestamp: 2025-10-24 17:42:19 UTC</div>
-</div>
-</div>
-<div class="font-mono-id text-xs font-bold text-primary bg-brand-blue-subtle px-3 py-1.5 rounded-lg border border-primary/20 tracking-wider">
-                  SEALED &amp; VALIDATED
-                </div>
-</div>
-</div>
-</div>
-<!-- RIGHT COLUMN: Simplified Audit Timeline (4 cols) -->
-<div class="lg:col-span-4 flex flex-col space-y-4">
-<div class="bg-surface-default border border-border-subtle rounded-xl p-6 shadow-sm">
-<div class="flex items-center justify-between pb-4 mb-4 border-b border-border-subtle">
-<div class="flex items-center gap-2">
-<span class="material-symbols-outlined text-text-secondary text-[20px]">history</span>
-<h3 class="font-headline-sm text-base font-bold text-brand-navy">Audit Milestones</h3>
-</div>
-<span class="font-mono-id text-[11px] text-status-safe font-semibold bg-status-safe-bg px-2 py-0.5 rounded border border-status-safe-border">Immutable</span>
-</div>
-<!-- 4 Clean Timeline Steps -->
-<div class="space-y-6 relative before:absolute before:inset-0 before:left-3.5 before:w-0.5 before:bg-border-subtle">
-<!-- Milestone 1 -->
-<div class="relative flex items-start gap-4">
-<div class="w-7 h-7 rounded-full bg-surface-default border-2 border-primary text-primary flex items-center justify-center shrink-0 z-10 text-xs font-bold font-mono-id">
-                    1
-                  </div>
-<div class="flex flex-col space-y-1 pt-0.5">
-<div class="flex items-center justify-between">
-<span class="text-sm font-semibold text-brand-navy">Baseline Computed</span>
-<span class="font-mono-id text-[11px] text-text-tertiary">14:22:05</span>
-</div>
-<p class="text-xs text-text-secondary leading-relaxed">
-                      180-day rolling baseline compiled: mean ₹820.50 with σ=₹245.10.
-                    </p>
-</div>
-</div>
-<!-- Milestone 2 -->
-<div class="relative flex items-start gap-4">
-<div class="w-7 h-7 rounded-full bg-surface-default border-2 border-risk-critical text-risk-critical flex items-center justify-center shrink-0 z-10 text-xs font-bold font-mono-id">
-                    2
-                  </div>
-<div class="flex flex-col space-y-1 pt-0.5">
-<div class="flex items-center justify-between">
-<span class="text-sm font-semibold text-brand-navy">Rule Triggered</span>
-<span class="font-mono-id text-[11px] text-text-tertiary">14:22:06</span>
-</div>
-<p class="text-xs text-text-secondary leading-relaxed">
-                      Rule <span class="font-mono-id text-[11px] font-semibold text-risk-critical">R-901</span> breached: ₹14,250 wire hit +54.8σ departure.
-                    </p>
-</div>
-</div>
-<!-- Milestone 3 -->
-<div class="relative flex items-start gap-4">
-<div class="w-7 h-7 rounded-full bg-surface-default border-2 border-primary text-primary flex items-center justify-center shrink-0 z-10 text-xs font-bold font-mono-id">
-                    3
-                  </div>
-<div class="flex flex-col space-y-1 pt-0.5">
-<div class="flex items-center justify-between">
-<span class="text-sm font-semibold text-brand-navy">AI Narrative Drafted</span>
-<span class="font-mono-id text-[11px] text-text-tertiary">14:22:09</span>
-</div>
-<p class="text-xs text-text-secondary leading-relaxed">
-                      Part V narrative auto-generated directly from deterministic tokens.
-                    </p>
-</div>
-</div>
-<!-- Milestone 4 -->
-<div class="relative flex items-start gap-4">
-<div class="w-7 h-7 rounded-full bg-surface-default border-2 border-status-safe text-status-safe flex items-center justify-center shrink-0 z-10 text-xs font-bold font-mono-id">
-                    4
-                  </div>
-<div class="flex flex-col space-y-1 pt-0.5">
-<div class="flex items-center justify-between">
-<span class="text-sm font-semibold text-brand-navy">Investigator Verified</span>
-<span class="font-mono-id text-[11px] text-text-tertiary">16:04:31</span>
-</div>
-<p class="text-xs text-text-secondary leading-relaxed">
-                      Analyst S. Jenkins completed SWIFT trace check and confirmed SAR filing.
-                    </p>
-</div>
-</div>
-</div>
-<!-- Quick Meta Footer -->
-<div class="mt-6 pt-4 border-t border-border-subtle flex items-center justify-between text-[11px] text-text-tertiary font-mono-id">
-<span>Ledger: Synchronized</span>
-<span class="flex items-center gap-1.5 text-status-safe">
-<span class="w-1.5 h-1.5 rounded-full bg-status-safe"></span>
-                  Validated
-                </span>
-</div>
-</div>
-</div>
-</div>
-</div>
-<!-- Simple Toast Notification -->
-<div class="fixed bottom-6 right-6 hidden z-50 bg-brand-navy text-on-primary px-4 py-3 rounded-lg shadow-lg border border-border-strong flex items-center gap-3 transition-all duration-300 transform translate-y-2" id="toastNotification">
-<span class="material-symbols-outlined text-status-safe text-[20px]" id="toastIcon">check_circle</span>
-<div class="flex flex-col">
-<span class="font-title-md text-xs font-semibold text-white" id="toastTitle">Action Completed</span>
-<span class="font-body-sm text-xs text-slate-300" id="toastMessage">SAR PDF downloaded.</span>
-</div>
-</div>
-</main>
-</div>
-</main>
+<div class="flex-1 flex flex-col min-w-0 h-full animate-fade-in bg-surface-subtle">
+  
+  <!-- Premium Header (Document Style) -->
+  <header class="h-[80px] bg-surface-default/80 backdrop-blur-md border-b border-border-subtle sticky top-0 z-30 px-8 flex items-center justify-between shadow-sm">
+    <div class="flex items-center gap-4">
+      <div class="flex items-center gap-2 px-3 py-1.5 rounded-lg bg-primary-subtle border border-primary/20">
+        <span class="material-symbols-rounded text-[18px] text-primary">fact_check</span>
+        <span class="font-sans text-xs font-semibold text-primary tracking-widest uppercase">SAR Audit Report</span>
+      </div>
+      <div class="h-4 w-px bg-border-strong"></div>
+      <span class="font-mono text-sm font-bold text-text-primary tracking-wider">DOC-882914-TX</span>
+    </div>
+    
+    <div class="flex items-center gap-4">
+      <button id="print-btn" class="h-9 px-4 rounded-lg bg-surface-default border border-border-strong text-text-secondary font-semibold text-xs flex items-center gap-2 hover:bg-surface-subtle transition-colors shadow-sm">
+        <span class="material-symbols-rounded text-[18px]">print</span> Print Ready
+      </button>
+      <button id="downloadPdfBtn" class="h-9 px-4 rounded-lg bg-primary text-white font-semibold text-xs flex items-center gap-2 hover:bg-primary-hover transition-colors shadow-sm">
+        <span class="material-symbols-rounded text-[18px]">file_download</span> Export PDF
+      </button>
+    </div>
+  </header>
+
+  <main class="p-8 w-full mx-auto pb-24 flex justify-center">
+    
+    <!-- The Document -->
+    <div class="bg-surface-default max-w-[900px] w-full rounded-sm shadow-card border border-border-subtle p-12 relative overflow-hidden">
+      
+      <!-- Official Header -->
+      <div class="border-b-2 border-primary pb-6 mb-8 flex justify-between items-start">
+        <div>
+          <h1 class="font-display text-3xl font-bold text-text-primary tracking-tight">Suspicious Activity Report (SAR)</h1>
+          <p class="text-sm font-semibold text-text-secondary mt-1 tracking-widest uppercase">FinCEN Standard Form 111 Extraction</p>
+        </div>
+        <div class="text-right">
+          <div class="w-16 h-16 ml-auto rounded border-2 border-border-strong flex items-center justify-center opacity-40">
+            <span class="material-symbols-rounded text-3xl">qr_code_2</span>
+          </div>
+          <p class="font-mono text-[10px] text-text-tertiary mt-2">ID: DOC-882914-TX</p>
+        </div>
+      </div>
+
+      <!-- Part I: Subject -->
+      <section class="mb-10">
+        <h2 class="font-sans text-xs font-bold text-primary uppercase tracking-widest mb-4 flex items-center gap-2">
+          <span class="material-symbols-rounded text-[16px]">person</span> Part I: Subject Information
+        </h2>
+        <div class="grid grid-cols-2 gap-y-4 gap-x-8 bg-surface-subtle p-6 rounded-lg border border-border-subtle">
+          <div>
+            <div class="text-[10px] font-bold text-text-tertiary uppercase tracking-widest">Full Legal Name</div>
+            <div class="font-mono text-sm font-bold text-text-primary mt-1" id="audit-customer-name">Loading...</div>
+          </div>
+          <div>
+            <div class="text-[10px] font-bold text-text-tertiary uppercase tracking-widest">Account Number</div>
+            <div class="font-mono text-sm font-bold text-text-primary mt-1">#4829-1029-4411</div>
+          </div>
+          <div>
+            <div class="text-[10px] font-bold text-text-tertiary uppercase tracking-widest">Account Tenure</div>
+            <div class="font-mono text-sm font-bold text-text-primary mt-1">7.2 Years</div>
+          </div>
+          <div>
+            <div class="text-[10px] font-bold text-text-tertiary uppercase tracking-widest">Primary Risk Rating</div>
+            <div class="font-mono text-sm font-bold text-risk-critical mt-1 bg-risk-critical-bg px-2 py-0.5 rounded inline-block">High (Anomaly Detected)</div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Part II: Suspicious Activity -->
+      <section class="mb-10">
+        <h2 class="font-sans text-xs font-bold text-primary uppercase tracking-widest mb-4 flex items-center gap-2">
+          <span class="material-symbols-rounded text-[16px]">report</span> Part II: Suspicious Activity Information
+        </h2>
+        <div class="grid grid-cols-3 gap-4">
+          <div class="p-4 rounded-lg border border-border-subtle flex flex-col items-center text-center bg-surface-default">
+            <span class="text-[10px] font-bold text-text-tertiary uppercase tracking-widest">Baseline Mean (μ)</span>
+            <span class="font-mono text-xl font-bold text-text-primary mt-2">₹820.50</span>
+            <span class="text-[10px] text-text-tertiary mt-1">180-day window</span>
+          </div>
+          <div class="p-4 rounded-lg border border-border-subtle flex flex-col items-center text-center bg-surface-default">
+            <span class="text-[10px] font-bold text-text-tertiary uppercase tracking-widest">Triggered Txn</span>
+            <span class="font-mono text-xl font-bold text-risk-critical mt-2">₹14,250.00</span>
+            <span class="text-[10px] text-text-tertiary mt-1">FedLine Wire</span>
+          </div>
+          <div class="p-4 rounded-lg border border-risk-critical/30 flex flex-col items-center text-center bg-risk-critical-bg">
+            <span class="text-[10px] font-bold text-risk-critical uppercase tracking-widest">Total Deviation</span>
+            <span class="font-mono text-xl font-bold text-risk-critical mt-2">+54.8 σ</span>
+            <span class="text-[10px] text-risk-critical/70 mt-1">Threshold: 3.0σ</span>
+          </div>
+        </div>
+      </section>
+
+      <!-- Part III: Narrative Synthesis -->
+      <section class="mb-10">
+        <h2 class="font-sans text-xs font-bold text-primary uppercase tracking-widest mb-4 flex items-center gap-2">
+          <span class="material-symbols-rounded text-[16px]">edit_document</span> Part III: Narrative Synthesis
+        </h2>
+        
+        <div class="p-6 rounded-lg border border-border-strong bg-surface-default shadow-sm relative">
+          <!-- Watermark -->
+          <div class="absolute inset-0 flex items-center justify-center pointer-events-none opacity-[0.03]">
+            <span class="font-display font-black text-6xl rotate-[-30deg]">CONFIDENTIAL</span>
+          </div>
+
+          <div class="relative z-10 prose prose-sm prose-slate max-w-none text-text-primary leading-relaxed font-sans">
+            <p>
+              On October 24, 2025 at 14:22:04 UTC, account <span class="font-mono font-bold">#4829-1029-4411</span> initiated an atypical external outbound wire transfer totaling <strong class="font-mono text-risk-critical bg-risk-critical-bg px-1 rounded">₹14,250.00</strong> payable to <strong>Oasis Trading LLC (Seychelles)</strong>. Over the preceding 180-day baseline period, customer transactions averaged ₹820.50 with an expected standard deviation of ₹245.10.
+            </p>
+            <p class="mt-4">
+              The anomalous transaction represents an unprecedented <strong>+54.8σ deviation</strong> from established behavioral parameters. Cross-referencing against customer historical filings and merchant identifiers indicated no prior commercial relationship or verifiable trade invoices supporting this sudden liquidity transfer. Furthermore, the transaction was executed at 02:44 AM (local tz), entirely outside the historical operational window (09:00 - 18:00).
+            </p>
+          </div>
+        </div>
+      </section>
+
+      <!-- Footer Signatures -->
+      <div class="pt-8 mt-12 border-t-2 border-border-subtle flex justify-between">
+        <div>
+          <div class="font-display text-2xl font-signature text-brand-navy/80 mb-2 italic">K Balavignesh</div>
+          <div class="w-48 h-px bg-text-primary mb-2"></div>
+          <div class="text-[10px] font-bold text-text-secondary uppercase tracking-widest">Investigator Signature</div>
+          <div class="font-mono text-[10px] text-text-tertiary mt-1">ID: FX-9021</div>
+        </div>
+        <div class="text-right">
+          <div class="w-48 h-px bg-text-primary mb-2 mt-8"></div>
+          <div class="text-[10px] font-bold text-text-secondary uppercase tracking-widest">Date Filed</div>
+          <div class="font-mono text-[10px] text-text-tertiary mt-1" id="audit-date">October 24, 2025</div>
+        </div>
+      </div>
+      
+    </div>
+  </main>
 </div>

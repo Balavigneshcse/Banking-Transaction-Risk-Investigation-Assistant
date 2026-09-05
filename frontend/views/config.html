@@ -1,242 +1,120 @@
-<div class="pl-64"><main class="w-full pt-16 bg-surface min-h-[calc(100vh-4rem)]"><div class="flex flex-col w-full">
-<div class="p-8 max-w-[1360px] w-full mx-auto space-y-6">
-<!-- Clean Airy Header -->
-<div class="bg-surface-default p-6 rounded-xl border border-border-subtle shadow-sm flex flex-col md:flex-row md:items-center justify-between gap-4">
-<div class="space-y-1">
-<div class="flex items-center gap-3">
-<h1 class="font-headline-lg text-2xl text-brand-navy tracking-tight font-semibold">Rule Configuration</h1>
-<span class="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full bg-status-safe-bg border border-status-safe-border text-status-safe font-mono-id text-xs font-semibold">
-<span class="w-1.5 h-1.5 rounded-full bg-status-safe"></span>
-        Active • Hard Rules
+<div class="flex-1 flex flex-col min-w-0 h-full animate-fade-in">
+  
+  <!-- Premium Header -->
+  <header class="h-[80px] bg-surface-default/80 backdrop-blur-md border-b border-border-subtle sticky top-0 z-30 px-8 flex items-center justify-between">
+    <div class="flex items-center gap-4">
+      <div class="flex items-center gap-2 px-3 py-1.5 rounded-lg bg-surface-subtle border border-border-subtle">
+        <span class="material-symbols-rounded text-[18px] text-text-tertiary">tune</span>
+        <span class="font-sans text-xs font-semibold text-text-secondary tracking-widest uppercase">Detection Rules</span>
+      </div>
+      <div class="h-4 w-px bg-border-strong"></div>
+      <span class="font-display font-semibold text-text-primary text-lg">System Configuration</span>
+    </div>
+    
+    <div class="flex items-center gap-4">
+      <span class="font-sans text-[11px] font-medium text-text-tertiary flex items-center gap-1">
+        <span class="material-symbols-rounded text-[14px]">history</span> Last updated: 2 hours ago
       </span>
-</div>
-<p class="font-body-md text-text-secondary text-sm">Fine-tune detection thresholds and operational tolerances across production monitoring.</p>
-</div>
-<div class="flex items-center gap-3">
-<button class="h-9 px-4 rounded-lg bg-surface-muted text-text-secondary font-title-md text-xs hover:bg-surface-container-high hover:text-brand-navy transition-colors flex items-center gap-1.5" id="btn-dry-run" type="button">
-<span class="material-symbols-outlined text-[16px] text-primary">play_arrow</span>
-<span>Simulate Batch</span>
-</button>
-<button class="h-9 px-5 rounded-lg bg-primary text-on-primary font-title-md text-xs hover:bg-brand-blue-hover transition-colors shadow-sm flex items-center gap-1.5" id="btn-save" type="button">
-<span class="material-symbols-outlined text-[16px]">check</span>
-<span>Save Configuration</span>
-</button>
-</div>
-</div>
-<!-- Main 2-Column Content Layout -->
-<div class="grid grid-cols-1 lg:grid-cols-12 gap-6">
-<!-- Left Column: The 3 Essential Rule Cards -->
-<div class="lg:col-span-8 space-y-5">
-<!-- Card 1: Large Transaction Threshold -->
-<div class="bg-surface-default rounded-xl p-6 border border-border-subtle shadow-sm space-y-5">
-<div class="flex items-start justify-between">
-<div class="space-y-1">
-<div class="flex items-center gap-2">
-<span class="material-symbols-outlined text-primary text-[20px]">trending_up</span>
-<h2 class="font-title-md text-base text-brand-navy font-semibold">Large Transaction Threshold</h2>
-</div>
-<p class="font-body-sm text-text-secondary text-xs">Flags transactions deviating significantly from the customer's typical baseline amount.</p>
-</div>
-<span class="px-2 py-0.5 rounded bg-brand-blue-subtle text-primary font-mono-id text-xs font-medium">Rule #1</span>
-</div>
-<div class="grid grid-cols-1 md:grid-cols-2 gap-5 pt-1">
-<!-- Sigma Multiplier Slider -->
-<div class="space-y-3 bg-surface-subtle p-4 rounded-lg border border-border-subtle/60">
-<div class="flex items-center justify-between">
-<label class="font-title-md text-xs text-brand-navy uppercase tracking-wider" for="slider-large-txn">
-              Sigma Multiplier (σ)
+      <button class="h-9 px-4 rounded-lg bg-primary text-white font-semibold text-xs flex items-center gap-2 hover:bg-primary-hover transition-colors shadow-sm" id="btn-save-config">
+        <span class="material-symbols-rounded text-[18px]">save</span> Save Changes
+      </button>
+    </div>
+  </header>
+
+  <main class="p-8 max-w-4xl w-full mx-auto space-y-8 pb-24">
+    
+    <div>
+      <h2 class="font-display text-2xl font-bold text-text-primary tracking-tight">Global Risk Parameters</h2>
+      <p class="text-sm text-text-secondary mt-1">Adjust the core deterministic thresholds that trigger the AI narrative synthesis.</p>
+    </div>
+
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+      
+      <!-- Standard Deviation Limit -->
+      <div class="bg-surface-default p-6 rounded-2xl shadow-card border border-border-subtle group hover:border-primary/30 transition-colors">
+        <div class="flex items-start justify-between mb-4">
+          <div>
+            <label class="text-[10px] font-bold text-primary uppercase tracking-widest flex items-center gap-1.5" for="input-sigma">
+              <span class="material-symbols-rounded text-[14px]">show_chart</span> Sigma Deviation Limit
             </label>
-<span class="font-mono-data text-sm text-primary font-bold bg-surface-default px-2 py-0.5 rounded border border-border-subtle" id="label-k-val">3.0σ</span>
-</div>
-<input class="w-full accent-primary cursor-pointer h-1.5 bg-border-strong rounded-lg appearance-none" id="slider-large-txn" max="5.0" min="1.5" step="0.1" type="range" value="3.0"/>
-<div class="flex justify-between font-mono-id text-[11px] text-text-tertiary">
-<span>1.5σ (Sensitive)</span>
-<span>3.0σ (Balanced)</span>
-<span>5.0σ (Strict)</span>
-</div>
-</div>
-<!-- Min Amount Floor -->
-<div class="space-y-3 bg-surface-subtle p-4 rounded-lg border border-border-subtle/60">
-<div class="flex items-center justify-between">
-<label class="font-title-md text-xs text-brand-navy uppercase tracking-wider" for="input-floor-amount">
-              Minimum Floor Amount
+            <p class="text-[11px] text-text-tertiary mt-1 pr-4">Triggers when a transaction amount exceeds the customer's 180-day baseline mean by this many standard deviations.</p>
+          </div>
+          <div class="relative flex items-center shrink-0">
+            <input id="input-sigma" class="w-20 h-9 pl-3 pr-6 text-right rounded-lg bg-surface-subtle border-transparent focus:bg-surface-default focus:border-primary focus:ring-1 focus:ring-primary font-mono text-sm font-bold text-text-primary transition-all shadow-inner" type="number" step="0.1" value="3.0"/>
+            <span class="absolute right-3 font-mono text-xs text-text-tertiary font-bold pointer-events-none">σ</span>
+          </div>
+        </div>
+        <div class="w-full bg-surface-hover rounded-full h-1.5 mt-4">
+          <div class="bg-primary h-1.5 rounded-full" style="width: 30%"></div>
+        </div>
+      </div>
+
+      <!-- Floor Amount -->
+      <div class="bg-surface-default p-6 rounded-2xl shadow-card border border-border-subtle group hover:border-primary/30 transition-colors">
+        <div class="flex items-start justify-between mb-4">
+          <div>
+            <label class="text-[10px] font-bold text-primary uppercase tracking-widest flex items-center gap-1.5" for="input-floor-amount">
+              <span class="material-symbols-rounded text-[14px]">payments</span> Floor Amount Limit
             </label>
-<span class="font-mono-id text-[11px] text-text-tertiary">Absolute INR</span>
+            <p class="text-[11px] text-text-tertiary mt-1 pr-4">Ignore deviations if the absolute transaction amount is below this threshold (reduces false positives on small accounts).</p>
+          </div>
+          <div class="relative flex items-center shrink-0">
+            <span class="absolute left-3 font-mono text-sm text-text-tertiary font-bold pointer-events-none">₹</span>
+            <input id="input-floor-amount" class="w-28 h-9 pl-6 pr-3 text-right rounded-lg bg-surface-subtle border-transparent focus:bg-surface-default focus:border-primary focus:ring-1 focus:ring-primary font-mono text-sm font-bold text-text-primary transition-all shadow-inner" type="number" value="10000"/>
+          </div>
+        </div>
+      </div>
+      
+    </div>
+
+    <!-- Active Rules Ledger -->
+    <div class="mt-12">
+      <h3 class="font-sans text-sm font-bold text-text-primary flex items-center gap-2 mb-4">
+        <span class="material-symbols-rounded text-text-secondary text-[18px]">verified_user</span> Active Detection Heuristics
+      </h3>
+      
+      <div class="bg-surface-default rounded-2xl shadow-card border border-border-subtle divide-y divide-border-subtle">
+        
+        <div class="p-5 flex items-center justify-between hover:bg-surface-subtle/30 transition-colors">
+          <div class="flex items-center gap-4">
+            <div class="w-10 h-10 rounded-full bg-risk-critical-bg flex items-center justify-center border border-risk-critical/20">
+              <span class="material-symbols-rounded text-risk-critical text-[18px]">warning</span>
+            </div>
+            <div>
+              <div class="flex items-center gap-2">
+                <span class="font-mono text-xs font-bold text-brand-navy">R-901</span>
+                <span class="font-sans text-sm font-semibold text-text-primary">Extreme Velocity Deviation</span>
+              </div>
+              <p class="text-xs text-text-secondary mt-0.5">Flags transactions > 3σ from historical 180-day mean.</p>
+            </div>
+          </div>
+          <div class="relative inline-flex items-center cursor-pointer">
+            <input type="checkbox" class="sr-only peer" checked disabled>
+            <div class="w-9 h-5 bg-border-strong peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-4 after:w-4 after:transition-all peer-checked:bg-primary opacity-60"></div>
+          </div>
+        </div>
+
+        <div class="p-5 flex items-center justify-between hover:bg-surface-subtle/30 transition-colors">
+          <div class="flex items-center gap-4">
+            <div class="w-10 h-10 rounded-full bg-risk-warning-bg flex items-center justify-center border border-risk-warning/20">
+              <span class="material-symbols-rounded text-risk-warning text-[18px]">schedule</span>
+            </div>
+            <div>
+              <div class="flex items-center gap-2">
+                <span class="font-mono text-xs font-bold text-brand-navy">R-902</span>
+                <span class="font-sans text-sm font-semibold text-text-primary">Off-Hours Liquidity Event</span>
+              </div>
+              <p class="text-xs text-text-secondary mt-0.5">Flags transfers executed completely outside typical customer active window.</p>
+            </div>
+          </div>
+          <div class="relative inline-flex items-center cursor-pointer">
+            <input type="checkbox" class="sr-only peer" checked disabled>
+            <div class="w-9 h-5 bg-border-strong peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-4 after:w-4 after:transition-all peer-checked:bg-primary opacity-60"></div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+    
+  </main>
 </div>
-<div class="relative flex items-center">
-<span class="absolute left-3 font-mono-data text-xs text-text-tertiary">₹</span>
-<input class="w-full h-9 pl-7 pr-3 rounded bg-surface-default border border-border-strong font-mono-data text-xs text-brand-navy focus:outline-none focus:border-primary transition-all" id="input-floor-amount" step="100" type="number" value="2500"/>
-</div>
-<p class="font-body-sm text-[11px] text-text-tertiary">Ignores statistical breaks beneath this absolute threshold.</p>
-</div>
-</div>
-</div>
-<!-- Card 2: New Payee Burst -->
-<div class="bg-surface-default rounded-xl p-6 border border-border-subtle shadow-sm space-y-5">
-<div class="flex items-start justify-between">
-<div class="space-y-1">
-<div class="flex items-center gap-2">
-<span class="material-symbols-outlined text-risk-warning text-[20px]">bolt</span>
-<h2 class="font-title-md text-base text-brand-navy font-semibold">New Payee Burst</h2>
-</div>
-<p class="font-body-sm text-text-secondary text-xs">Identifies sudden accelerated transfers directed at first-time or unfamiliar recipients.</p>
-</div>
-<span class="px-2 py-0.5 rounded bg-brand-blue-subtle text-primary font-mono-id text-xs font-medium">Rule #2</span>
-</div>
-<div class="grid grid-cols-1 md:grid-cols-3 gap-4 pt-1">
-<!-- Payee Window -->
-<div class="space-y-2 bg-surface-subtle p-4 rounded-lg border border-border-subtle/60">
-<label class="font-title-md text-xs text-brand-navy uppercase tracking-wider block" for="input-payee-window">
-            Payee Window
-          </label>
-<div class="flex items-center gap-2">
-<input class="w-full h-9 px-3 rounded bg-surface-default border border-border-strong font-mono-data text-xs text-brand-navy focus:outline-none focus:border-primary transition-all" id="input-payee-window" max="60" min="1" type="number" value="7"/>
-<span class="font-mono-id text-xs text-text-tertiary">Days</span>
-</div>
-<p class="font-body-sm text-[11px] text-text-tertiary">Window for new recipient status.</p>
-</div>
-<!-- Max Burst Count -->
-<div class="space-y-2 bg-surface-subtle p-4 rounded-lg border border-border-subtle/60">
-<label class="font-title-md text-xs text-brand-navy uppercase tracking-wider block" for="input-burst-count">
-            Max Burst Count
-          </label>
-<div class="flex items-center gap-2">
-<input class="w-full h-9 px-3 rounded bg-surface-default border border-border-strong font-mono-data text-xs text-brand-navy focus:outline-none focus:border-primary transition-all" id="input-burst-count" max="10" min="1" type="number" value="2"/>
-<span class="font-mono-id text-xs text-text-tertiary">Txns</span>
-</div>
-<p class="font-body-sm text-[11px] text-text-tertiary">Triggers alert if exceeded in 1h.</p>
-</div>
-<!-- Spend Multiplier -->
-<div class="space-y-2 bg-surface-subtle p-4 rounded-lg border border-border-subtle/60">
-<label class="font-title-md text-xs text-brand-navy uppercase tracking-wider block" for="input-spend-mult">
-            Spend Multiplier
-          </label>
-<div class="flex items-center gap-2">
-<input class="w-full h-9 px-3 rounded bg-surface-default border border-border-strong font-mono-data text-xs text-brand-navy focus:outline-none focus:border-primary transition-all" id="input-spend-mult" max="10.0" min="1.0" step="0.1" type="number" value="2.0"/>
-<span class="font-mono-id text-xs text-text-tertiary">× Avg</span>
-</div>
-<p class="font-body-sm text-[11px] text-text-tertiary">Multiplier against 30d median.</p>
-</div>
-</div>
-</div>
-<!-- Card 3: Off-Hours Buffer -->
-<div class="bg-surface-default rounded-xl p-6 border border-border-subtle shadow-sm space-y-5">
-<div class="flex items-start justify-between">
-<div class="space-y-1">
-<div class="flex items-center gap-2">
-<span class="material-symbols-outlined text-tertiary text-[20px]">schedule</span>
-<h2 class="font-title-md text-base text-brand-navy font-semibold">Off-Hours Buffer</h2>
-</div>
-<p class="font-body-sm text-text-secondary text-xs">Evaluates activity outside the customer's typical active daily time window.</p>
-</div>
-<span class="px-2 py-0.5 rounded bg-brand-blue-subtle text-primary font-mono-id text-xs font-medium">Rule #3</span>
-</div>
-<div class="grid grid-cols-1 md:grid-cols-2 gap-5 pt-1">
-<!-- Buffer Minutes -->
-<div class="space-y-2 bg-surface-subtle p-4 rounded-lg border border-border-subtle/60">
-<label class="font-title-md text-xs text-brand-navy uppercase tracking-wider block" for="input-buffer-mins">
-            Minutes Buffer
-          </label>
-<div class="flex items-center gap-2">
-<input class="w-full h-9 px-3 rounded bg-surface-default border border-border-strong font-mono-data text-xs text-brand-navy focus:outline-none focus:border-primary transition-all" id="input-buffer-mins" max="360" min="0" step="15" type="number" value="60"/>
-<span class="font-mono-id text-xs text-text-tertiary">Mins</span>
-</div>
-<p class="font-body-sm text-[11px] text-text-tertiary">Grace period surrounding historical active hours.</p>
-</div>
-<!-- Travel Exemption Toggle -->
-<div class="flex flex-col justify-center bg-surface-subtle p-4 rounded-lg border border-border-subtle/60">
-<label class="flex items-start gap-3 cursor-pointer select-none">
-<input checked="" class="mt-0.5 w-4 h-4 text-primary rounded border-border-strong focus:ring-primary accent-primary" type="checkbox"/>
-<div class="space-y-0.5">
-<span class="font-title-md text-xs text-brand-navy block font-semibold">Travel Mode Exemption</span>
-<span class="font-body-sm text-text-tertiary text-[11px] block leading-tight">Automatically suppress alerts if traveler notification is on file.</span>
-</div>
-</label>
-</div>
-</div>
-</div>
-</div>
-<!-- Right Column: Clean Minimal Summary & History Panel -->
-<div class="lg:col-span-4 space-y-5">
-<!-- Dry Run Impact Preview Card -->
-<div class="bg-surface-default rounded-xl p-5 border border-border-subtle shadow-sm space-y-4">
-<div class="flex items-center justify-between pb-1 border-b border-border-subtle">
-<div class="flex items-center gap-2">
-<span class="material-symbols-outlined text-primary text-[18px]">query_stats</span>
-<h3 class="font-title-md text-sm text-brand-navy font-semibold">Dry Run Preview</h3>
-</div>
-<span class="font-mono-id text-[11px] text-text-tertiary">1,000 Txns</span>
-</div>
-<div class="space-y-2.5">
-<div class="flex items-center justify-between p-3 rounded-lg bg-surface-subtle">
-<span class="font-body-sm text-xs text-text-secondary">Expected Alerts</span>
-<span class="font-mono-data text-xs text-brand-navy font-bold">42 alerts / day</span>
-</div>
-<div class="flex items-center justify-between p-3 rounded-lg bg-surface-subtle">
-<span class="font-body-sm text-xs text-text-secondary">Delta vs. Previous</span>
-<span class="font-mono-data text-xs text-risk-warning font-bold">+12 alerts</span>
-</div>
-<div class="flex items-center justify-between p-3 rounded-lg bg-surface-subtle">
-<span class="font-body-sm text-xs text-text-secondary">Projected False Positives</span>
-<span class="font-mono-data text-xs text-status-safe font-bold">1.08%</span>
-</div>
-</div>
-<div class="p-3 rounded-lg bg-brand-blue-subtle/50 text-text-secondary text-[11px] flex items-start gap-2">
-<span class="material-symbols-outlined text-primary text-[16px] shrink-0 mt-0.5">info</span>
-<span>Based on 30-day historical replay. Applying this config changes expected queue throughput by ~4.8%.</span>
-</div>
-</div>
-<!-- Concise Version History Log -->
-<div class="bg-surface-default rounded-xl p-5 border border-border-subtle shadow-sm space-y-4">
-<div class="flex items-center justify-between pb-1 border-b border-border-subtle">
-<div class="flex items-center gap-2">
-<span class="material-symbols-outlined text-text-tertiary text-[18px]">history</span>
-<h3 class="font-title-md text-sm text-brand-navy font-semibold">Version History</h3>
-</div>
-<span class="font-mono-id text-[11px] text-text-tertiary">Audited</span>
-</div>
-<div class="space-y-3">
-<!-- Entry 1 -->
-<div class="space-y-1 pb-3 border-b border-border-subtle/60">
-<div class="flex items-center justify-between">
-<span class="font-mono-data text-xs text-brand-navy font-semibold">v3.8.4 (Active)</span>
-<span class="font-mono-id text-[11px] text-text-tertiary">Today, 14:22</span>
-</div>
-<p class="font-body-sm text-text-secondary text-xs">Standard deviation adjusted to 3.0σ for FinCEN baseline.</p>
-<div class="font-mono-id text-[11px] text-text-tertiary">By M. Vance</div>
-</div>
-<!-- Entry 2 -->
-<div class="space-y-1 pb-3 border-b border-border-subtle/60">
-<div class="flex items-center justify-between">
-<span class="font-mono-data text-xs text-brand-navy font-semibold">v3.8.3</span>
-<span class="font-mono-id text-[11px] text-text-tertiary">Oct 24</span>
-</div>
-<p class="font-body-sm text-text-secondary text-xs">Adjusted payee window to 7 days for holiday payroll.</p>
-<div class="font-mono-id text-[11px] text-text-tertiary">By S. Thorne</div>
-</div>
-<!-- Entry 3 -->
-<div class="space-y-1">
-<div class="flex items-center justify-between">
-<span class="font-mono-data text-xs text-brand-navy font-semibold">v3.8.2</span>
-<span class="font-mono-id text-[11px] text-text-tertiary">Sep 18</span>
-</div>
-<p class="font-body-sm text-text-secondary text-xs">Enabled travel mode automatic exemption protocol.</p>
-<div class="font-mono-id text-[11px] text-text-tertiary">By J. Doe</div>
-</div>
-</div>
-</div>
-</div>
-</div>
-<!-- Minimal Success Toast -->
-<div class="fixed bottom-6 right-6 hidden bg-brand-navy text-on-primary px-4 py-3 rounded-lg shadow-lg z-50 flex items-center gap-3" id="save-toast">
-<span class="material-symbols-outlined text-status-safe text-[20px]">check_circle</span>
-<div class="text-xs">
-<div class="font-title-md font-semibold text-on-primary">Configuration Saved</div>
-<div class="font-body-sm text-text-tertiary text-[11px]">Applied to live deterministic engine</div>
-</div>
-<button class="text-text-tertiary hover:text-on-primary ml-2" id="toast-close" type="button">
-<span class="material-symbols-outlined text-[16px]">close</span>
-</button>
-</div>
-</div>
-</div></main></div>

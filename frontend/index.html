@@ -3,104 +3,159 @@
 <head>
   <meta charset="utf-8"/>
   <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
-  <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" rel="stylesheet"/>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet"/>
+  <title>SentinelRisk | Investigation Platform</title>
+  
+  <!-- Premium Fonts: Outfit for display/headers, Inter for data/body -->
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet"/>
+  
+  <!-- Material Icons (Rounded for softer aesthetics) -->
+  <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Rounded:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" rel="stylesheet"/>
+  
+  <!-- Tailwind CSS via CDN -->
   <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
   <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  
+  <!-- Advanced Tailwind Config -->
   <script id="tailwind-config">
     tailwind.config = {
       theme: {
         extend: {
-          colors: {
-            "surface": "#F9FAFB",
-            "surface-default": "#FFFFFF",
-            "surface-subtle": "#F3F4F6",
-            "border-subtle": "#E5E7EB",
-            "border-strong": "#D1D5DB",
-            "brand-navy": "#111827",
-            "text-primary": "#1F2937",
-            "text-secondary": "#4B5563",
-            "text-tertiary": "#6B7280",
-            "primary": "#000000",
-            "primary-hover": "#374151",
-            "risk-critical": "#B91C1C",
-            "risk-critical-bg": "#FEF2F2",
-            "risk-critical-border": "#FECACA",
-            "risk-warning": "#B45309",
-            "risk-warning-bg": "#FFFBEB",
-            "status-safe": "#15803D",
-            "status-safe-bg": "#F0FDF4",
-          },
           fontFamily: {
+            "display": ["Outfit", "sans-serif"],
             "sans": ["Inter", "sans-serif"],
-            "mono": ["ui-monospace", "SFMono-Regular", "Menlo", "Monaco", "Consolas", "monospace"],
+            "mono": ["JetBrains Mono", "monospace"],
+          },
+          colors: {
+            "surface": "#F8FAFC", // Slate 50
+            "surface-default": "#FFFFFF",
+            "surface-subtle": "#F1F5F9", // Slate 100
+            "surface-hover": "#E2E8F0", // Slate 200
+            
+            "border-subtle": "#E2E8F0",
+            "border-strong": "#CBD5E1",
+            
+            "text-primary": "#0F172A", // Slate 900
+            "text-secondary": "#475569", // Slate 600
+            "text-tertiary": "#94A3B8", // Slate 400
+            
+            // Premium Indigo Primary
+            "primary": "#4338ca", // Indigo 700
+            "primary-hover": "#3730a3", // Indigo 800
+            "primary-subtle": "#e0e7ff", // Indigo 100
+            
+            // Semantic / Risk Colors
+            "risk-critical": "#dc2626", // Red 600
+            "risk-critical-bg": "#fef2f2", // Red 50
+            "risk-warning": "#ea580c", // Orange 600
+            "risk-warning-bg": "#fff7ed", // Orange 50
+            "status-safe": "#16a34a", // Green 600
+            "status-safe-bg": "#f0fdf4", // Green 50
           },
           boxShadow: {
-            'sm': '0 1px 2px 0 rgba(0, 0, 0, 0.05)',
-            'DEFAULT': '0 1px 3px 0 rgba(0, 0, 0, 0.1), 0 1px 2px 0 rgba(0, 0, 0, 0.06)',
-            'md': '0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06)',
+            'card': '0 4px 6px -1px rgba(0, 0, 0, 0.03), 0 2px 4px -1px rgba(0, 0, 0, 0.02), 0 0 0 1px rgba(15, 23, 42, 0.03)',
+            'card-hover': '0 10px 15px -3px rgba(0, 0, 0, 0.05), 0 4px 6px -2px rgba(0, 0, 0, 0.03), 0 0 0 1px rgba(15, 23, 42, 0.03)',
+            'glass': '0 4px 30px rgba(0, 0, 0, 0.03)',
+          },
+          animation: {
+            'fade-in': 'fadeIn 0.4s cubic-bezier(0.16, 1, 0.3, 1) forwards',
+            'slide-up': 'slideUp 0.5s cubic-bezier(0.16, 1, 0.3, 1) forwards',
+            'pulse-soft': 'pulseSoft 2s cubic-bezier(0.4, 0, 0.6, 1) infinite',
+          },
+          keyframes: {
+            fadeIn: {
+              '0%': { opacity: '0' },
+              '100%': { opacity: '1' },
+            },
+            slideUp: {
+              '0%': { opacity: '0', transform: 'translateY(10px)' },
+              '100%': { opacity: '1', transform: 'translateY(0)' },
+            },
+            pulseSoft: {
+              '0%, 100%': { opacity: '1' },
+              '50%': { opacity: '0.5' },
+            }
           }
         }
       }
     };
   </script>
+  
   <style>
     @layer base {
-      html, body { margin: 0; padding: 0; background-color: #F9FAFB; }
-      /* Custom scrollbar */
+      html, body { 
+        margin: 0; padding: 0; 
+        background-color: #F8FAFC; 
+        color: #0F172A;
+      }
+      
+      /* Elegant Scrollbar */
       ::-webkit-scrollbar { width: 6px; height: 6px; }
       ::-webkit-scrollbar-track { background: transparent; }
-      ::-webkit-scrollbar-thumb { background: #E5E7EB; border-radius: 4px; }
-      ::-webkit-scrollbar-thumb:hover { background: #D1D5DB; }
+      ::-webkit-scrollbar-thumb { background: #CBD5E1; border-radius: 10px; }
+      ::-webkit-scrollbar-thumb:hover { background: #94A3B8; }
+      
+      /* Make icons render perfectly */
+      .material-symbols-rounded {
+        font-variation-settings: 'FILL' 1, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+      }
     }
   </style>
 </head>
-<body class="bg-surface font-sans text-text-primary min-h-screen flex antialiased selection:bg-gray-200 selection:text-gray-900">
+
+<body class="font-sans antialiased selection:bg-primary-subtle selection:text-primary flex h-screen overflow-hidden">
   
-  <!-- Left Sidebar Navigation -->
-  <aside class="print:hidden fixed left-0 top-0 h-full w-[260px] bg-surface-default border-r border-border-subtle z-50 flex flex-col justify-between shadow-sm">
-    <div>
-      <div class="h-[72px] px-6 flex items-center gap-3 border-b border-border-subtle">
-        <div class="flex flex-col">
-          <span class="font-sans font-bold text-lg text-brand-navy tracking-tight leading-none">SentinelRisk</span>
-          <span class="font-sans text-[11px] font-medium text-text-tertiary mt-1 tracking-wide uppercase">Core Investigation</span>
-        </div>
+  <!-- Premium Sidebar -->
+  <aside class="w-[280px] h-full bg-surface-default border-r border-border-subtle flex flex-col justify-between shadow-glass z-50 shrink-0">
+    
+    <!-- Header / Brand -->
+    <div class="h-[80px] px-8 flex items-center gap-3 border-b border-border-subtle/50">
+      <div class="w-8 h-8 rounded-lg bg-primary flex items-center justify-center shadow-sm">
+        <span class="material-symbols-rounded text-white text-[18px]">security</span>
       </div>
-      <nav class="p-4 space-y-1.5" id="sidebar-nav">
-        <a class="nav-link flex items-center gap-3 px-3 py-2.5 rounded-lg font-medium text-sm text-text-secondary hover:bg-surface-subtle hover:text-text-primary transition-colors" href="#/investigation" data-path="investigation">
-          <span class="material-symbols-outlined text-[20px] text-text-tertiary group-hover:text-text-primary">find_in_page</span>
-          <span>Investigation Case</span>
-        </a>
-        <a class="nav-link flex items-center gap-3 px-3 py-2.5 rounded-lg font-medium text-sm text-text-secondary hover:bg-surface-subtle hover:text-text-primary transition-colors" href="#/baseline" data-path="baseline">
-          <span class="material-symbols-outlined text-[20px] text-text-tertiary group-hover:text-text-primary">insights</span>
-          <span>Customer Baselines</span>
-        </a>
-        <a class="nav-link flex items-center gap-3 px-3 py-2.5 rounded-lg font-medium text-sm text-text-secondary hover:bg-surface-subtle hover:text-text-primary transition-colors" href="#/config" data-path="config">
-          <span class="material-symbols-outlined text-[20px] text-text-tertiary group-hover:text-text-primary">rule</span>
-          <span>Detection Rules</span>
-        </a>
-        <a class="nav-link flex items-center gap-3 px-3 py-2.5 rounded-lg font-medium text-sm text-text-secondary hover:bg-surface-subtle hover:text-text-primary transition-colors" href="#/audit" data-path="audit">
-          <span class="material-symbols-outlined text-[20px] text-text-tertiary group-hover:text-text-primary">fact_check</span>
-          <span>Regulatory Audit</span>
-        </a>
-      </nav>
+      <div class="flex flex-col">
+        <span class="font-display font-bold text-xl text-text-primary tracking-tight leading-none">SentinelRisk</span>
+        <span class="font-sans text-[10px] font-semibold text-primary tracking-widest uppercase mt-1">Core Engine</span>
+      </div>
     </div>
-    <div class="p-5 border-t border-border-subtle bg-surface-default">
-      <div class="flex items-center justify-between">
-        <div class="flex flex-col">
-          <span class="font-sans text-xs text-text-secondary font-medium">System Status</span>
-        </div>
-        <span class="inline-flex items-center gap-1.5 px-2 py-1 rounded-md bg-status-safe-bg text-status-safe text-[11px] font-medium border border-green-200">
-          <span class="w-1.5 h-1.5 rounded-full bg-status-safe animate-pulse"></span> Active
-        </span>
+    
+    <!-- Navigation -->
+    <nav class="flex-1 px-4 py-6 space-y-1.5 overflow-y-auto" id="sidebar-nav">
+      <div class="px-4 pb-2 text-[10px] font-bold text-text-tertiary uppercase tracking-widest">Dashboards</div>
+      
+      <a class="nav-link group flex items-center gap-3 px-4 py-2.5 rounded-xl font-medium text-sm text-text-secondary hover:bg-surface-subtle hover:text-text-primary transition-all duration-200 ease-out" href="#/investigation" data-path="investigation">
+        <span class="material-symbols-rounded text-[20px] text-text-tertiary group-hover:text-primary transition-colors">travel_explore</span>
+        <span>Investigation Case</span>
+      </a>
+      
+      <a class="nav-link group flex items-center gap-3 px-4 py-2.5 rounded-xl font-medium text-sm text-text-secondary hover:bg-surface-subtle hover:text-text-primary transition-all duration-200 ease-out" href="#/baseline" data-path="baseline">
+        <span class="material-symbols-rounded text-[20px] text-text-tertiary group-hover:text-primary transition-colors">monitoring</span>
+        <span>Customer Baselines</span>
+      </a>
+      
+      <div class="px-4 pt-6 pb-2 text-[10px] font-bold text-text-tertiary uppercase tracking-widest">Configuration</div>
+      
+      <a class="nav-link group flex items-center gap-3 px-4 py-2.5 rounded-xl font-medium text-sm text-text-secondary hover:bg-surface-subtle hover:text-text-primary transition-all duration-200 ease-out" href="#/config" data-path="config">
+        <span class="material-symbols-rounded text-[20px] text-text-tertiary group-hover:text-primary transition-colors">tune</span>
+        <span>Detection Rules</span>
+      </a>
+      
+      <a class="nav-link group flex items-center gap-3 px-4 py-2.5 rounded-xl font-medium text-sm text-text-secondary hover:bg-surface-subtle hover:text-text-primary transition-all duration-200 ease-out" href="#/audit" data-path="audit">
+        <span class="material-symbols-rounded text-[20px] text-text-tertiary group-hover:text-primary transition-colors">gavel</span>
+        <span>Regulatory Audit</span>
+      </a>
+    </nav>
+    
+    <!-- Footer / Status -->
+    <div class="p-6 border-t border-border-subtle/50 bg-surface-default">
+      <div class="flex items-center justify-between p-3">
       </div>
     </div>
   </aside>
 
-  <!-- Main Content Wrapper for SPA -->
-  <div id="app-root" class="flex-1 flex flex-col min-w-0 pl-[260px]">
-    <!-- View content will be injected here via app.js -->
-  </div>
+  <!-- Main Viewport -->
+  <main class="flex-1 flex flex-col min-w-0 h-full relative overflow-y-auto bg-surface scroll-smooth" id="app-root">
+    <!-- View content is injected here -->
+  </main>
 
   <script src="app.js"></script>
 </body>
