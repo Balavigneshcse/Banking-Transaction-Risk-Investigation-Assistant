@@ -35,4 +35,4 @@ The application is a Python-based server that serves both the API endpoints and 
 All customer history, transaction sets, and rule-based triggering anomalies were synthesized programmatically using a custom data pipeline to accurately represent standard banking distributions (e.g., typical median spend vs isolated 4+ sigma deviations). The database is pre-seeded with this mock data.
 
 ## Demo Video
-[Demo Video Link] - (Link to be added prior to submission)
+https://youtu.be/xeRFG7SsCro
