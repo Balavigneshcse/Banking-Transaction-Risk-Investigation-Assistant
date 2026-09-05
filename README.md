@@ -14,18 +14,19 @@ The application is a Python-based server that serves both the API endpoints and 
    ```bash
    pip install -r requirements.txt
    ```
-2. Set your Gemini API key and Database Password in your terminal (using PowerShell):
-   ```powershell
-   $env:GEMINI_API_KEY="YOUR_API_KEY_HERE"
-   $env:DB_PASSWORD="[PASSWORD]"
+2. Set up your environment variables:
+   Create a `.env` file in the root directory of the project (you can copy the provided `.env.example` file) and add your Gemini API Key and MySQL password:
+   ```env
+   GEMINI_API_KEY=your_gemini_api_key_here
+   DB_PASSWORD=your_mysql_password_here
    ```
-   *(Note: The system requires your Gemini API key to generate the AI narrative. Replace YOUR_API_KEY_HERE with your actual key.)*
+   *(Note: The system requires your Gemini API key to generate the AI narrative. Replace with your actual key.)*
 
 3. Start the application:
    ```bash
    python app.py
    ```
-4. Open your browser and navigate to: http://localhost:8000
+4. Open your browser and navigate to: http://localhost:8080
 
 ## Environment Variables
 * `GEMINI_API_KEY`: Required. The API key for Google's Gemini models used for generating the narrative reports.
