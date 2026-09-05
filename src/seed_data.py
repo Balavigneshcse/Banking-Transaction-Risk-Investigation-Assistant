@@ -105,7 +105,7 @@ def build_synthetic_customers():
 
     # 1. Clean / routine customer - no anomalies at all
     clean_txns = _routine_transactions("anitha")
-    customers["Anitha Raman"] = (date(2023, 3, 10), clean_txns)
+    customers["Balavignesh"] = (date(2023, 3, 10), clean_txns)
 
     # 2. One unusually large transfer, otherwise routine
     vikram_txns = _routine_transactions("vikram") + [{
@@ -115,7 +115,7 @@ def build_synthetic_customers():
         "payee_first_seen": OLD_PAYEE_FIRST_SEEN,
         "description": "Large one-off transfer",
     }]
-    customers["Vikram Shah"] = (date(2022, 7, 1), vikram_txns)
+    customers["Deepak"] = (date(2022, 7, 1), vikram_txns)
 
     # 3. Multiple rule triggers: new payee burst, odd hours, pattern break
     priya_base = _routine_transactions("priya")
@@ -159,7 +159,7 @@ def build_synthetic_customers():
         "description": "Wire transfer",
     }]
     priya_txns = priya_base + burst + odd_hour_txn + pattern_break_txn
-    customers["Priya Nair"] = (date(2021, 11, 20), priya_txns)
+    customers["Dhayaanithi"] = (date(2021, 11, 20), priya_txns)
 
     return customers
 
@@ -169,7 +169,7 @@ def build_synthetic_customers():
 # ---------------------------------------------------------------------
 
 def load_into_mysql():
-    from db import get_connection
+    from src.db import get_connection
 
     conn = get_connection()
     cur = conn.cursor()
