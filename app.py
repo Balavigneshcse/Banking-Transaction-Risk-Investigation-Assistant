@@ -11,6 +11,9 @@ Also serves the static frontend from ./frontend.
 """
 
 import os
+from dotenv import load_dotenv
+load_dotenv()
+
 from flask import Flask, jsonify, request, send_from_directory
 
 from src.db import get_connection, fetch_rule_config, fetch_rule_config_full, update_rule_config, DEFAULT_RULE_CONFIG

@@ -4,44 +4,41 @@
   <meta charset="utf-8"/>
   <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
   <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" rel="stylesheet"/>
-  <link href="https://fonts.googleapis.com/css2?family=Hanken+Grotesk:wght@100..900&family=Inter:wght@100..900&family=JetBrains+Mono:wght@400..700&display=swap" rel="stylesheet"/>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet"/>
   <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
   <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
   <script id="tailwind-config">
     tailwind.config = {
-      darkMode: "class",
       theme: {
         extend: {
           colors: {
-            "surface": "#F8FAFC",
+            "surface": "#F9FAFB",
             "surface-default": "#FFFFFF",
-            "surface-subtle": "#F1F5F9",
-            "border-subtle": "#E2E8F0",
-            "border-strong": "#CBD5E1",
-            "brand-navy": "#0F172A",
-            "text-primary": "#0F172A",
-            "text-secondary": "#475569",
-            "text-tertiary": "#94A3B8",
-            "primary": "#2563EB",
-            "primary-hover": "#1D4ED8",
-            "risk-critical": "#DC2626",
+            "surface-subtle": "#F3F4F6",
+            "border-subtle": "#E5E7EB",
+            "border-strong": "#D1D5DB",
+            "brand-navy": "#111827",
+            "text-primary": "#1F2937",
+            "text-secondary": "#4B5563",
+            "text-tertiary": "#6B7280",
+            "primary": "#000000",
+            "primary-hover": "#374151",
+            "risk-critical": "#B91C1C",
             "risk-critical-bg": "#FEF2F2",
             "risk-critical-border": "#FECACA",
-            "risk-warning": "#D97706",
+            "risk-warning": "#B45309",
             "risk-warning-bg": "#FFFBEB",
-            "status-safe": "#16A34A",
+            "status-safe": "#15803D",
             "status-safe-bg": "#F0FDF4",
           },
           fontFamily: {
-            "display": ["Hanken Grotesk", "sans-serif"],
-            "body": ["Inter", "sans-serif"],
-            "mono": ["JetBrains Mono", "monospace"],
-            "headline-sm": ["Hanken Grotesk", "sans-serif"],
-            "title-md": ["Inter", "sans-serif"],
-            "body-md": ["Inter", "sans-serif"],
-            "mono-id": ["JetBrains Mono", "monospace"],
-            "mono-data": ["JetBrains Mono", "monospace"],
-            "label-md": ["Inter", "sans-serif"],
+            "sans": ["Inter", "sans-serif"],
+            "mono": ["ui-monospace", "SFMono-Regular", "Menlo", "Monaco", "Consolas", "monospace"],
+          },
+          boxShadow: {
+            'sm': '0 1px 2px 0 rgba(0, 0, 0, 0.05)',
+            'DEFAULT': '0 1px 3px 0 rgba(0, 0, 0, 0.1), 0 1px 2px 0 rgba(0, 0, 0, 0.06)',
+            'md': '0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06)',
           }
         }
       }
@@ -49,54 +46,59 @@
   </script>
   <style>
     @layer base {
-      html, body { margin: 0; padding: 0; }
+      html, body { margin: 0; padding: 0; background-color: #F9FAFB; }
+      /* Custom scrollbar */
+      ::-webkit-scrollbar { width: 6px; height: 6px; }
+      ::-webkit-scrollbar-track { background: transparent; }
+      ::-webkit-scrollbar-thumb { background: #E5E7EB; border-radius: 4px; }
+      ::-webkit-scrollbar-thumb:hover { background: #D1D5DB; }
     }
   </style>
 </head>
-<body class="bg-surface font-body text-text-primary min-h-screen flex antialiased selection:bg-blue-100 selection:text-blue-900">
+<body class="bg-surface font-sans text-text-primary min-h-screen flex antialiased selection:bg-gray-200 selection:text-gray-900">
   
   <!-- Left Sidebar Navigation -->
-  <aside class="print:hidden fixed left-0 top-0 h-full w-64 bg-surface-default border-r border-border-subtle z-50 flex flex-col justify-between">
+  <aside class="print:hidden fixed left-0 top-0 h-full w-[260px] bg-surface-default border-r border-border-subtle z-50 flex flex-col justify-between shadow-sm">
     <div>
-      <div class="h-16 px-6 flex items-center gap-3 border-b border-border-subtle">
+      <div class="h-[72px] px-6 flex items-center gap-3 border-b border-border-subtle">
         <div class="flex flex-col">
-          <span class="font-display font-bold text-base text-brand-navy tracking-tight leading-none">SentinelRisk</span>
-          <span class="font-mono text-[11px] text-text-tertiary mt-1">Core Investigation</span>
+          <span class="font-sans font-bold text-lg text-brand-navy tracking-tight leading-none">SentinelRisk</span>
+          <span class="font-sans text-[11px] font-medium text-text-tertiary mt-1 tracking-wide uppercase">Core Investigation</span>
         </div>
       </div>
-      <nav class="p-4 space-y-1" id="sidebar-nav">
+      <nav class="p-4 space-y-1.5" id="sidebar-nav">
         <a class="nav-link flex items-center gap-3 px-3 py-2.5 rounded-lg font-medium text-sm text-text-secondary hover:bg-surface-subtle hover:text-text-primary transition-colors" href="#/investigation" data-path="investigation">
-          <span class="material-symbols-outlined text-[19px]">find_in_page</span>
+          <span class="material-symbols-outlined text-[20px] text-text-tertiary group-hover:text-text-primary">find_in_page</span>
           <span>Investigation Case</span>
         </a>
         <a class="nav-link flex items-center gap-3 px-3 py-2.5 rounded-lg font-medium text-sm text-text-secondary hover:bg-surface-subtle hover:text-text-primary transition-colors" href="#/baseline" data-path="baseline">
-          <span class="material-symbols-outlined text-[19px]">insights</span>
+          <span class="material-symbols-outlined text-[20px] text-text-tertiary group-hover:text-text-primary">insights</span>
           <span>Customer Baselines</span>
         </a>
         <a class="nav-link flex items-center gap-3 px-3 py-2.5 rounded-lg font-medium text-sm text-text-secondary hover:bg-surface-subtle hover:text-text-primary transition-colors" href="#/config" data-path="config">
-          <span class="material-symbols-outlined text-[19px]">rule</span>
+          <span class="material-symbols-outlined text-[20px] text-text-tertiary group-hover:text-text-primary">rule</span>
           <span>Detection Rules</span>
         </a>
         <a class="nav-link flex items-center gap-3 px-3 py-2.5 rounded-lg font-medium text-sm text-text-secondary hover:bg-surface-subtle hover:text-text-primary transition-colors" href="#/audit" data-path="audit">
-          <span class="material-symbols-outlined text-[19px]">fact_check</span>
-          <span>SAR &amp; Regulatory Audit</span>
+          <span class="material-symbols-outlined text-[20px] text-text-tertiary group-hover:text-text-primary">fact_check</span>
+          <span>Regulatory Audit</span>
         </a>
       </nav>
     </div>
-    <div class="p-4 border-t border-border-subtle bg-surface-subtle/50">
+    <div class="p-5 border-t border-border-subtle bg-surface-default">
       <div class="flex items-center justify-between">
         <div class="flex flex-col">
-          <span class="font-mono text-xs text-text-secondary font-medium">Deterministic Core</span>
+          <span class="font-sans text-xs text-text-secondary font-medium">System Status</span>
         </div>
-        <span class="inline-flex items-center gap-1.5 px-2 py-0.5 rounded-full bg-status-safe-bg text-status-safe text-[11px] font-medium">
-          <span class="w-1.5 h-1.5 rounded-full bg-status-safe"></span> Live Guard
+        <span class="inline-flex items-center gap-1.5 px-2 py-1 rounded-md bg-status-safe-bg text-status-safe text-[11px] font-medium border border-green-200">
+          <span class="w-1.5 h-1.5 rounded-full bg-status-safe animate-pulse"></span> Active
         </span>
       </div>
     </div>
   </aside>
 
   <!-- Main Content Wrapper for SPA -->
-  <div id="app-root" class="flex-1 flex flex-col min-w-0">
+  <div id="app-root" class="flex-1 flex flex-col min-w-0 pl-[260px]">
     <!-- View content will be injected here via app.js -->
   </div>
 
