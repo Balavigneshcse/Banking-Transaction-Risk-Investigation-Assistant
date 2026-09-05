@@ -91,6 +91,10 @@ function initInvestigation() {
   select.innerHTML = optionsHtml;
 
   var updateMeta = function() {
+    if (!select.value) {
+      tbody.innerHTML = '<tr><td colspan="6" class="py-4 text-center text-risk-warning">No customers found. Please check your database.</td></tr>';
+      return;
+    }
     var c = globalState.customers.find(function(c) { return c.customer_id == select.value; });
     if(c) meta.textContent = 'Account opened: ' + new Date(c.account_opened_date).toLocaleDateString();
     globalState.selectedCustomerId = select.value;
@@ -416,9 +420,13 @@ function initAudit() {
 
 // Bootstrap
 async function bootstrap() {
-  await fetchCustomers();
-  if (globalState.customers.length > 0) {
-    globalState.selectedCustomerId = globalState.customers[0].customer_id;
+  try {
+    await fetchCustomers();
+    if (globalState.customers && globalState.customers.length > 0) {
+      globalState.selectedCustomerId = globalState.customers[0].customer_id;
+    }
+  } catch (err) {
+    console.error("Failed to load initial data:", err);
   }
   handleRoute();
 }

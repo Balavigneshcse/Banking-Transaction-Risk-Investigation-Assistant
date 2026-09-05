@@ -47,7 +47,11 @@ def fetch_rule_config(conn):
 def fetch_rule_config_full(conn):
     """Load tunable rule thresholds with descriptions for the admin UI."""
     cur = conn.cursor(dictionary=True)
-    cur.execute("SELECT config_key, config_value, description FROM rule_config")
+    try:
+        cur.execute("SELECT config_key, config_value, description FROM rule_config")
+    except Exception:
+        # Fallback if 'description' column is missing from an older schema
+        cur.execute("SELECT config_key, config_value, '' as description FROM rule_config")
     rows = cur.fetchall()
     cur.close()
     return rows
