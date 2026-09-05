@@ -1,0 +1,148 @@
+<!-- Main Content Wrapper -->
+<div class="pl-64 flex-1 flex flex-col min-w-0">
+<!-- Clean Minimalist Header -->
+<header class="h-16 bg-surface-default border-b border-border-subtle sticky top-0 z-20 px-8 flex items-center justify-between">
+<div class="flex items-center gap-3">
+<span class="text-xs font-mono text-text-tertiary tracking-wide">CASE QUEUE</span>
+<span class="text-border-strong text-xs">/</span>
+<span class="font-mono text-xs font-semibold text-brand-navy">INC-882914-TX</span>
+</div>
+<div class="flex items-center gap-5">
+<div class="relative w-64">
+<span class="material-symbols-outlined absolute left-3 top-2 text-text-tertiary text-[18px]">search</span>
+<input class="w-full h-9 pl-9 pr-3 text-xs bg-surface-subtle rounded-lg border border-border-subtle focus:outline-none focus:border-primary focus:bg-white transition-all placeholder:text-text-tertiary" placeholder="Search case or reference..." type="text"/>
+</div>
+<div class="h-4 w-px bg-border-subtle"></div>
+<div class="flex items-center gap-3">
+<div class="text-right hidden sm:block">
+<div class="text-xs font-semibold text-brand-navy leading-none">Agent M. Vance</div>
+<div class="font-mono text-[10px] text-text-tertiary mt-0.5">FX-9021</div>
+</div>
+<img alt="Investigator Profile" class="w-9 h-9 rounded-full object-cover border border-border-subtle" src="https://lh3.googleusercontent.com/aida/AEtjO1U66QfZHZ44X4x27G1rf06RDJ_dzCPY2ob4JH9WHU9gtW3uCn6CkEVzmZ3sx9hZz_xutypAGh46zS-l8COqxYNWv-g4ZSKzlcrc8zwOYD_mPB55yFB2Fpc1BMCwQtCCjuda_-p9w-dClKJDM6TQWhTQE9OcMk_JgysG3LlKc7C0W2vc3q9tT7ehEmC1ld2dBM-Dezsp3FdjJatDksS4-wJBP3pF6_7DDxYsKtDoUd6hRimXpjAFBD9nz1Q"/>
+</div>
+</div>
+</header>
+<!-- Main Container -->
+<main class="p-8 max-w-6xl w-full mx-auto space-y-6">
+<!-- 1. Clear Prominent Case Header -->
+<section class="bg-surface-default rounded-xl border border-border-subtle p-6 flex flex-col sm:flex-row sm:items-center justify-between gap-5">
+<div class="flex items-center gap-4">
+<div class="w-12 h-12 rounded-xl bg-blue-50 text-primary flex items-center justify-center font-display font-bold text-lg border border-blue-100">
+            EV
+          </div>
+<div>
+<div class="flex items-center gap-3 flex-wrap">
+<select id="customer-select" class="text-2xl font-display font-bold text-brand-navy tracking-tight bg-transparent border-0 border-b-2 border-primary focus:ring-0 cursor-pointer pb-1 pr-8">
+  <option>Loading...</option>
+</select>
+<span id="investigation-status-badge" class="hidden inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full text-xs font-semibold bg-risk-warning-bg text-risk-warning border border-amber-200">
+<span class="w-1.5 h-1.5 rounded-full bg-risk-warning"></span>
+                Review Recommended
+              </span>
+</div>
+<p id="customer-meta" class="text-xs text-text-tertiary mt-1">Select a customer to view details</p>
+</div>
+</div>
+<div class="flex items-center gap-3 shrink-0">
+<button id="investigate-btn" class="h-9 px-4 rounded-lg bg-surface-default border border-border-strong text-text-secondary text-xs font-semibold hover:bg-surface-subtle transition-colors flex items-center gap-1.5" type="button">
+<span class="material-symbols-outlined text-[16px]">sync</span>
+<span>Run Investigation</span>
+</button>
+<button class="h-9 px-4 rounded-lg bg-primary text-white text-xs font-semibold hover:bg-primary-hover shadow-sm transition-colors flex items-center gap-1.5" type="button">
+<span class="material-symbols-outlined text-[16px]">ios_share</span>
+<span>Export SAR</span>
+</button>
+</div>
+</section>
+<!-- 2. Concise 3-Metric KPI Row -->
+<section class="grid grid-cols-1 md:grid-cols-3 gap-5">
+<!-- Metric 1 -->
+<div class="bg-surface-default p-5 rounded-xl border border-border-subtle">
+<span class="text-xs font-medium text-text-tertiary">Outlier Transaction</span>
+<div class="mt-2 flex items-baseline gap-2">
+<span class="font-mono text-2xl font-bold text-brand-navy tracking-tight">?14,250.00</span>
+</div>
+<span class="text-xs text-text-secondary mt-1 block">vs. ?820.00 60-day baseline avg</span>
+</div>
+<!-- Metric 2 -->
+<div class="bg-surface-default p-5 rounded-xl border border-border-subtle">
+<span class="text-xs font-medium text-text-tertiary">Statistical Deviation</span>
+<div class="mt-2 flex items-baseline gap-2">
+<span class="font-mono text-2xl font-bold text-risk-critical tracking-tight">+3.40 σ</span>
+</div>
+<span class="text-xs text-text-secondary mt-1 block">Breaches 3.0σ standard threshold</span>
+</div>
+<!-- Metric 3 -->
+<div class="bg-surface-default p-5 rounded-xl border border-border-subtle">
+<span class="text-xs font-medium text-text-tertiary">Triggered Rules</span>
+<div class="mt-2 flex items-baseline gap-2">
+<span class="font-mono text-2xl font-bold text-brand-navy tracking-tight">3 Rules</span>
+</div>
+<span class="text-xs text-text-secondary mt-1 block">Mathematical outlier violations</span>
+</div>
+</section>
+<div id="investigation-results-container" class="hidden space-y-6">
+<!-- 3. Clean AI Investigation Narrative Card -->
+<section class="bg-surface-default rounded-xl border border-border-subtle p-6 space-y-4">
+<div class="flex items-center justify-between border-b border-border-subtle pb-3">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-primary text-[20px]">psychology</span>
+<h2 class="text-sm font-display font-semibold text-brand-navy">AI Investigation Narrative</h2>
+</div>
+<span class="text-[11px] font-medium text-text-tertiary bg-surface-subtle px-2.5 py-1 rounded-md">
+            Deterministic Synthesis
+          </span>
+</div>
+</div>
+</section>
+<!-- 4. Core Rule Violations List -->
+<div class="pt-2">
+<div class="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-surface-subtle text-[11px] text-text-secondary font-medium">
+<span class="material-symbols-outlined text-text-tertiary text-[14px]">verified_user</span>
+<span>Compliance Note: Narrative operates as an explanatory summary. All legal thresholds and actions are deterministic.</span>
+</div>
+</div>
+</section>
+<!-- 4. Core Rule Violations List -->
+<section class="bg-surface-default rounded-xl border border-border-subtle p-6 space-y-4">
+<div class="flex items-center justify-between border-b border-border-subtle pb-3">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-primary text-[20px]">rule_folder</span>
+<h2 class="text-sm font-display font-semibold text-brand-navy">Core Rule Violations</h2>
+</div>
+<span class="text-xs text-text-tertiary font-mono">3 rules fired</span>
+</div>
+</div>
+<div id="rule-violations-list" class="space-y-3">
+  <!-- Dynamic violations inserted here -->
+</div>
+</section>
+<!-- 5. Minimalist Recent Transactions Table -->
+<section class="bg-surface-default rounded-xl border border-border-subtle p-6 space-y-4">
+<div class="flex items-center justify-between border-b border-border-subtle pb-3">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-primary text-[20px]">receipt_long</span>
+<h2 class="text-sm font-display font-semibold text-brand-navy">Recent Transactions</h2>
+</div>
+<span class="text-xs text-text-tertiary font-mono">Window: Past 24h</span>
+</div>
+<div class="overflow-x-auto">
+<table class="w-full text-left text-xs">
+<thead>
+<tr class="text-text-tertiary uppercase tracking-wider font-semibold border-b border-border-subtle">
+<th class="pb-3 font-medium">Status</th>
+<th class="pb-3 font-medium">Reference</th>
+<th class="pb-3 font-medium">Timestamp</th>
+<th class="pb-3 font-medium">Payee / Description</th>
+<th class="pb-3 font-medium text-right">Amount</th>
+<th class="pb-3 font-medium text-right">Deviation</th>
+</tr>
+</thead>
+<tbody id="transactions-list-tbody" class="divide-y divide-border-subtle font-normal text-text-secondary">
+  <!-- Dynamic rows -->
+</tbody>
+</table>
+</div>
+</section>
+</main>
+</div>
