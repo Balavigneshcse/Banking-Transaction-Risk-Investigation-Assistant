@@ -14,10 +14,13 @@ The application is a Python-based server that serves both the API endpoints and 
    ```bash
    pip install -r requirements.txt
    ```
-2. Set your Gemini API key (our application uses `gemini-1.5-pro`):
-   ```bash
-   export GEMINI_API_KEY="your_api_key_here"
+2. Set your Gemini API key and Database Password in your terminal (using PowerShell):
+   ```powershell
+   $env:GEMINI_API_KEY="YOUR_API_KEY_HERE"
+   $env:DB_PASSWORD="Bala@sql"
    ```
+   *(Note: The system requires your Gemini API key to generate the AI narrative. Replace YOUR_API_KEY_HERE with your actual key.)*
+
 3. Start the application:
    ```bash
    python app.py
@@ -26,6 +29,7 @@ The application is a Python-based server that serves both the API endpoints and 
 
 ## Environment Variables
 * `GEMINI_API_KEY`: Required. The API key for Google's Gemini models used for generating the narrative reports.
+* `DB_PASSWORD`: Required. The password for the MySQL database.
 
 ## Data Generation
 All customer history, transaction sets, and rule-based triggering anomalies were synthesized programmatically using a custom data pipeline to accurately represent standard banking distributions (e.g., typical median spend vs isolated 4+ sigma deviations). The database is pre-seeded with this mock data.
